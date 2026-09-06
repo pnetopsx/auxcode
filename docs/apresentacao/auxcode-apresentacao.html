@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>auxcode · apresentação</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root{
+    --ink:#1b1f24; --muted:#5b6470; --rule:#d9dde3; --panel:#f6f7f9;
+    --acc:#0f6e7a; --acc-soft:#e3f1f3; --warn:#b4531a; --warn-soft:#fbeee4;
+    --ok:#2f7d4f; --ok-soft:#e6f3ea;
+  }
+  html,body{margin:0;padding:0;background:#fff}
+  body{font-family:"Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;color:var(--ink);font-size:10.5pt;line-height:1.45;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @media screen{ body{background:#e9ebee} .page{margin:12px auto;box-shadow:0 2px 12px rgba(0,0,0,.18)} }
+  .page{width:210mm;height:297mm;padding:15mm 18mm 16mm;box-sizing:border-box;position:relative;overflow:hidden;background:#fff;break-after:page;page-break-after:always}
+  .page:last-child{break-after:auto;page-break-after:auto}
+  .foot{position:absolute;left:18mm;right:18mm;bottom:8mm;display:flex;justify-content:space-between;font-size:8pt;color:var(--muted);border-top:.5pt solid var(--rule);padding-top:2mm}
+  .kicker{font-size:8.5pt;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);font-weight:600;margin:0 0 2mm}
+  h1{font-size:20pt;line-height:1.15;font-weight:600;margin:0 0 3mm;letter-spacing:-.01em}
+  h2{font-size:12pt;font-weight:600;margin:5mm 0 1.5mm}
+  h2:first-of-type{margin-top:0}
+  p{margin:0 0 2.2mm}
+  ul,ol{margin:0 0 2.5mm;padding-left:5mm}
+  li{margin:0 0 1.2mm}
+  li b, p b{font-weight:600}
+  .lead{font-size:12pt;line-height:1.4;color:var(--ink);margin-bottom:4mm}
+  .muted{color:var(--muted)}
+  .small{font-size:9pt}
+  figure{margin:3mm 0 2mm}
+  figure svg{display:block;width:100%;height:auto}
+  figcaption{font-size:8.5pt;color:var(--muted);margin-top:1.5mm;line-height:1.35}
+  code,pre{font-family:"SF Mono",Menlo,Consolas,monospace}
+  code{font-size:9pt;background:var(--panel);padding:0 .3em;border-radius:3px}
+  pre{font-size:8.6pt;line-height:1.4;background:var(--panel);border:.5pt solid var(--rule);border-radius:4px;padding:2.2mm 3mm;margin:0 0 2.5mm;white-space:pre-wrap;word-break:break-word}
+  pre code{background:none;padding:0;font-size:inherit}
+  table{border-collapse:collapse;width:100%;font-size:9.2pt;margin:0 0 3mm}
+  th,td{text-align:left;vertical-align:top;padding:1.4mm 2mm;border-bottom:.5pt solid var(--rule)}
+  th{font-weight:600;color:var(--muted);font-size:8.5pt;text-transform:uppercase;letter-spacing:.06em}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4mm}
+  .grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:3mm}
+  .card{border:.6pt solid var(--rule);border-radius:5px;padding:3mm 3.2mm;background:#fff}
+  .card h3{font-size:10.5pt;margin:0 0 1.2mm;font-weight:600}
+  .card p{font-size:9.4pt;margin:0;line-height:1.4}
+  .card.acc{border-color:var(--acc);background:var(--acc-soft)}
+  .card.warn{border-color:var(--warn);background:var(--warn-soft)}
+  .card.ok{border-color:var(--ok);background:var(--ok-soft)}
+  .num{display:inline-block;width:5.2mm;height:5.2mm;border-radius:50%;background:var(--acc);color:#fff;font-size:8.5pt;font-weight:600;text-align:center;line-height:5.2mm;margin-right:1.5mm}
+  .step h3{font-size:10pt;margin:0 0 1mm;font-weight:600}
+  .step p{font-size:9pt;line-height:1.38;margin:0}
+  .note{border-left:2pt solid var(--acc);background:var(--acc-soft);padding:2mm 3mm;border-radius:0 4px 4px 0;font-size:9.4pt;margin:2mm 0 3mm}
+  .note.warn{border-color:var(--warn);background:var(--warn-soft)}
+  .toc{columns:2;column-gap:8mm;font-size:9.4pt;margin:0;padding:0;list-style:none}
+  .toc li{display:flex;justify-content:space-between;border-bottom:.5pt dotted var(--rule);padding:.8mm 0;break-inside:avoid}
+  .toc li span:last-child{color:var(--muted)}
+  .cover{padding-top:38mm}
+  .cover h1{font-size:40pt;margin:0 0 5mm;letter-spacing:-.02em}
+  .cover .lead{font-size:14pt;max-width:150mm;color:var(--ink)}
+  .cover .meta{position:absolute;left:18mm;right:18mm;bottom:22mm;font-size:9.5pt;color:var(--muted);line-height:1.5}
+  .cover .band{position:absolute;left:0;top:0;width:100%;height:9mm;background:var(--acc)}
+  .cp{font-family:"SF Mono",Menlo,Consolas,monospace;font-size:8.2pt;line-height:1.5;background:var(--panel);border:.5pt solid var(--rule);border-radius:4px;padding:2.2mm 3mm}
+  .cp div{margin:0 0 .6mm}
+  .cp .h{font-weight:700;margin-bottom:1.4mm;border-bottom:.5pt solid var(--rule);padding-bottom:1mm}
+  .cp b{font-weight:700;color:var(--acc)}
+  .ovf{position:absolute;top:3mm;right:3mm;background:#c00;color:#fff;font:700 9pt monospace;padding:1mm 2mm;border-radius:3px;display:none}
+  /* SVG */
+  svg text{font-family:inherit}
+  .n{fill:#fff;stroke:#1b1f24;stroke-width:1.2}
+  .n-soft{fill:#f6f7f9;stroke:#8a929c;stroke-width:1}
+  .n-acc{fill:#e3f1f3;stroke:#0f6e7a;stroke-width:1.4}
+  .n-warn{fill:#fbeee4;stroke:#b4531a;stroke-width:1.2}
+  .n-ok{fill:#e6f3ea;stroke:#2f7d4f;stroke-width:1.2}
+  .box{fill:none;stroke:#8a929c;stroke-width:1;stroke-dasharray:5 3}
+  .e{stroke:#1b1f24;stroke-width:1.2;fill:none}
+  .e-g{stroke:#5b6470;stroke-width:1.1;fill:none;stroke-dasharray:4 3}
+  .t{font-size:11.5px;fill:#1b1f24}
+  .t-b{font-size:11.5px;font-weight:600;fill:#1b1f24}
+  .t-s{font-size:10px;fill:#5b6470;font-weight:400}
+  .t-xs{font-size:9.5px;fill:#5b6470;font-weight:400}
+  .t-acc{fill:#0f6e7a}
+  .t-warn{fill:#b4531a}
+  .t-ok{fill:#2f7d4f}
+  .t-w{fill:#fff}
+</style>
+</head>
+<body>
+
+<!-- ============================ 1 · CAPA ============================ -->
+<section class="page cover">
+  <div class="band"></div>
+  <p class="kicker">Skill para o Claude Code · foco no roadmap</p>
+  <h1>auxcode</h1>
+  <p class="lead">Cada mudança ligada ao objetivo do projeto. Nada dado por pronto sem evidência. Retomada lendo o mínimo.</p>
+
+  <figure>
+    <svg viewBox="0 0 660 176" role="img" aria-label="Ciclo de cinco passos: retomar, alinhar, executar, provar, checkpoint, e de volta ao início na sessão seguinte">
+      <defs><marker id="a0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1b1f24"/></marker></defs>
+      <rect class="n" x="4" y="44" width="118" height="52" rx="7"/>
+      <rect class="n-acc" x="137.5" y="44" width="118" height="52" rx="7"/>
+      <rect class="n" x="271" y="44" width="118" height="52" rx="7"/>
+      <rect class="n" x="404.5" y="44" width="118" height="52" rx="7"/>
+      <rect class="n-acc" x="538" y="44" width="118" height="52" rx="7"/>
+      <text class="t-b" x="63" y="67" text-anchor="middle">1 Retomar<tspan class="t-s" x="63" dy="15">lê o mínimo</tspan></text>
+      <text class="t-b" x="196.5" y="67" text-anchor="middle">2 Alinhar<tspan class="t-s" x="196.5" dy="15">motivo + critério</tspan></text>
+      <text class="t-b" x="330" y="67" text-anchor="middle">3 Executar<tspan class="t-s" x="330" dy="15">só o pedido</tspan></text>
+      <text class="t-b" x="463.5" y="67" text-anchor="middle">4 Provar<tspan class="t-s" x="463.5" dy="15">evidência real</tspan></text>
+      <text class="t-b" x="597" y="67" text-anchor="middle">5 Checkpoint<tspan class="t-s" x="597" dy="15">um só, atual</tspan></text>
+      <path class="e" d="M122 70H137.5" marker-end="url(#a0)"/>
+      <path class="e" d="M255.5 70H271" marker-end="url(#a0)"/>
+      <path class="e" d="M389 70H404.5" marker-end="url(#a0)"/>
+      <path class="e" d="M522.5 70H538" marker-end="url(#a0)"/>
+      <path class="e" d="M597 96V134H63V97" marker-end="url(#a0)"/>
+      <text class="t-s" x="330" y="152" text-anchor="middle">sessão nova · próximo item da etapa</text>
+    </svg>
+  </figure>
+
+  <div class="meta">
+    <div><b>Versão 0.3.0</b> · setembro de 2026 · <code>github.com/pnetopsx/auxcode</code> · licença MIT</div>
+    <div>Documento de apresentação: o que a skill faz, como faz e o que muda no dia a dia de quem constrói aplicativos com o Claude Code.</div>
+  </div>
+</section>
+
+<!-- ============================ 2 · O QUE É ============================ -->
+<section class="page">
+  <div class="ovf"></div>
+  <p class="kicker">O que é, para quem</p>
+  <h1>Uma disciplina que o modelo aplica em pontos fixos do trabalho</h1>
+  <p class="lead">auxcode é um conjunto de instruções que o Claude Code carrega ao trabalhar num aplicativo. A partir daí o modelo exige de si mesmo três coisas: um motivo antes de codar, uma prova antes de dizer pronto e leitura mínima ao retomar.</p>
+
+  <div class="grid3">
+    <div class="card acc">
+      <h3>1. Nada sem motivo</h3>
+      <p>Antes de tocar em código, o Claude escreve uma linha ligando o pedido a um item do roadmap, a uma regra do projeto ou a um defeito comprovado. Sem isso, o pedido vai para o backlog e vira pergunta, não código.</p>
+    </div>
+    <div class="card acc">
+      <h3>2. Nada pronto sem evidência</h3>
+      <p>"Pronto" é o critério observável da linha cumprido no fluxo real, relatado em três estados: feito, verificado, publicado. O que não foi verificado é dito, não escondido.</p>
+    </div>
+    <div class="card acc">
+      <h3>3. Retomar lendo o mínimo</h3>
+      <p>Um mapa de fontes e um checkpoint curto vivem no próprio projeto. A sessão nova lê os dois, confere o estado real e segue, sem reler a documentação inteira.</p>
+    </div>
+  </div>
+
+  <h2>Para quem</h2>
+  <p>Para quem constrói aplicativos com o Claude Code, sozinho ou em equipe pequena, tem um roadmap ou quer passar a ter, e já viu uma sessão fugir do plano: refatoração que ninguém pediu, "pronto" que não estava, meia hora relendo documentos antes de escrever a primeira linha.</p>
+
+  <h2>O que ela não é</h2>
+  <p>Não é um monitor automático nem um gerador de relatórios. Não mede tokens nem percentuais de contexto. É uma disciplina de decisão com saídas que você consegue conferir: uma linha no chat antes do código, um relato em três estados no fim e um checkpoint gravado no projeto.</p>
+
+  <h2>Neste documento</h2>
+  <ul class="toc">
+    <li><span>O problema que ela resolve</span><span>3</span></li>
+    <li><span>O ciclo em cinco passos</span><span>4</span></li>
+    <li><span>A linha de alinhamento</span><span>5</span></li>
+    <li><span>Retomar lendo o mínimo</span><span>6</span></li>
+    <li><span>O checkpoint</span><span>7</span></li>
+    <li><span>Revisar um aplicativo existente</span><span>8</span></li>
+    <li><span>Provar que está pronto</span><span>9</span></li>
+    <li><span>Três portas de entrada</span><span>10</span></li>
+    <li><span>Como funciona por dentro</span><span>11</span></li>
+    <li><span>Instalar, usar e limites</span><span>12</span></li>
+  </ul>
+  <div class="foot"><span>auxcode · skill para o Claude Code · 0.3.0</span><span>2</span></div>
+</section>
+
+<!-- ============================ 3 · O PROBLEMA ============================ -->
+<section class="page">
+  <div class="ovf"></div>
+  <p class="kicker">O problema</p>
+  <h1>Cinco falhas que nascem sempre nos mesmos lugares</h1>
+  <p>Sessões longas com um agente de código repetem um padrão. Nenhuma dessas falhas é falta de capacidade do modelo. Todas são falta de disciplina em pontos previsíveis do trabalho.</p>
+  <ul>
+    <li><b>Desvio silencioso.</b> O pedido era uma correção; a sessão termina com uma refatoração, uma biblioteca nova e um tema escuro que ninguém pediu.</li>
+    <li><b>"Pronto" que não está.</b> O código compila, o modelo leu o próprio diff e declarou sucesso. O fluxo nunca rodou.</li>
+    <li><b>Releitura a cada sessão.</b> README, roadmap inteiro, todas as decisões, histórico. O contexto enche antes de a primeira linha ser escrita.</li>
+    <li><b>Tentativa repetida.</b> O que foi descartado ontem, com motivo, é tentado de novo hoje porque o motivo se perdeu.</li>
+    <li><b>Roadmap como enfeite.</b> O plano existe, mas nada liga o que está sendo feito ao item que deveria estar sendo fechado.</li>
+  </ul>
+
+  <figure>
+    <svg viewBox="0 0 660 292" role="img" aria-label="Duas linhas do tempo do mesmo pedido: sem disciplina, a sessão relê tudo, refatora sem pedido e declara pronto sem rodar; com a skill, lê mapa e checkpoint, escreve a linha de alinhamento, implementa só o pedido, prova pelo critério e grava o checkpoint">
+      <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1b1f24"/></marker></defs>
+      <text class="t-b" x="8" y="18">Sem disciplina</text>
+      <text class="t-xs" x="440" y="18">próxima sessão →</text>
+      <line class="e-g" x1="434" y1="24" x2="434" y2="272"/>
+      <!-- lane A -->
+      <rect class="n-soft" x="8" y="30" width="96" height="46" rx="6"/>
+      <rect class="n" x="116" y="30" width="96" height="46" rx="6"/>
+      <rect class="n-warn" x="224" y="30" width="96" height="46" rx="6"/>
+      <rect class="n-warn" x="332" y="30" width="96" height="46" rx="6"/>
+      <rect class="n-soft" x="440" y="30" width="96" height="46" rx="6"/>
+      <rect class="n-warn" x="548" y="30" width="96" height="46" rx="6"/>
+      <text class="t-b" x="56" y="50" text-anchor="middle">Relê tudo<tspan class="t-s" x="56" dy="14">docs inteiros</tspan></text>
+      <text class="t-b" x="164" y="50" text-anchor="middle">Implementa<tspan class="t-s" x="164" dy="14">o pedido</tspan></text>
+      <text class="t-b" x="272" y="50" text-anchor="middle">Aproveita e<tspan class="t-s" x="272" dy="14">refatora</tspan></text>
+      <text class="t-b" x="380" y="50" text-anchor="middle">Diz "pronto"<tspan class="t-s" x="380" dy="14">sem rodar o fluxo</tspan></text>
+      <text class="t-b" x="488" y="50" text-anchor="middle">Relê tudo<tspan class="t-s" x="488" dy="14">de novo</tspan></text>
+      <text class="t-b" x="596" y="50" text-anchor="middle">Não estava<tspan class="t-s" x="596" dy="14">pronto</tspan></text>
+      <path class="e" d="M104 53H116" marker-end="url(#a1)"/><path class="e" d="M212 53H224" marker-end="url(#a1)"/><path class="e" d="M320 53H332" marker-end="url(#a1)"/><path class="e" d="M428 53H440" marker-end="url(#a1)"/><path class="e" d="M536 53H548" marker-end="url(#a1)"/>
+      <text class="t-xs t-warn" x="56" y="92" text-anchor="middle">contexto cheio<tspan x="56" dy="12">antes de começar</tspan></text>
+      <text class="t-xs t-warn" x="272" y="92" text-anchor="middle">código fora<tspan x="272" dy="12">do pedido</tspan></text>
+      <text class="t-xs t-warn" x="380" y="92" text-anchor="middle">inspeção não<tspan x="380" dy="12">é execução</tspan></text>
+      <text class="t-xs t-warn" x="596" y="92" text-anchor="middle">retrabalho</text>
+      <!-- lane B -->
+      <text class="t-b" x="8" y="172">Com a skill</text>
+      <rect class="n-acc" x="8" y="184" width="96" height="46" rx="6"/>
+      <rect class="n-acc" x="116" y="184" width="96" height="46" rx="6"/>
+      <rect class="n" x="224" y="184" width="96" height="46" rx="6"/>
+      <rect class="n-acc" x="332" y="184" width="96" height="46" rx="6"/>
+      <rect class="n-acc" x="440" y="184" width="96" height="46" rx="6"/>
+      <rect class="n" x="548" y="184" width="96" height="46" rx="6"/>
+      <text class="t-b" x="56" y="204" text-anchor="middle">Lê mapa +<tspan class="t-s" x="56" dy="14">checkpoint</tspan></text>
+      <text class="t-b" x="164" y="204" text-anchor="middle">Linha de<tspan class="t-s" x="164" dy="14">alinhamento</tspan></text>
+      <text class="t-b" x="272" y="204" text-anchor="middle">Implementa<tspan class="t-s" x="272" dy="14">só isso</tspan></text>
+      <text class="t-b" x="380" y="204" text-anchor="middle">Prova pelo<tspan class="t-s" x="380" dy="14">critério</tspan></text>
+      <text class="t-b" x="488" y="204" text-anchor="middle">Checkpoint<tspan class="t-s" x="488" dy="14">substituído</tspan></text>
+      <text class="t-b" x="596" y="204" text-anchor="middle">Lê, confere<tspan class="t-s" x="596" dy="14">e segue</tspan></text>
+      <path class="e" d="M104 207H116" marker-end="url(#a1)"/><path class="e" d="M212 207H224" marker-end="url(#a1)"/><path class="e" d="M320 207H332" marker-end="url(#a1)"/><path class="e" d="M428 207H440" marker-end="url(#a1)"/><path class="e" d="M536 207H548" marker-end="url(#a1)"/>
+      <text class="t-xs t-acc" x="56" y="246" text-anchor="middle">2 arquivos,<tspan x="56" dy="12">não 20</tspan></text>
+      <text class="t-xs t-acc" x="164" y="246" text-anchor="middle">motivo +<tspan x="164" dy="12">critério</tspan></text>
+      <text class="t-xs t-acc" x="272" y="246" text-anchor="middle">extra vai<tspan x="272" dy="12">ao backlog</tspan></text>
+      <text class="t-xs t-acc" x="380" y="246" text-anchor="middle">teste falha<tspan x="380" dy="12">sem a correção</tspan></text>
+      <text class="t-xs t-acc" x="596" y="246" text-anchor="middle">sem reler<tspan x="596" dy="12">tudo</tspan></text>
+    </svg>
+    <figcaption>O mesmo pedido em duas sessões. Em cima, o padrão sem disciplina; embaixo, os pontos fixos que a skill impõe. Os blocos em destaque são os instrumentos da skill. Depois da linha tracejada, a sessão seguinte.</figcaption>
+  </figure>
+
+  <p>A skill não tenta impedir cada erro possível. Ela coloca uma checagem barata onde os erros costumam nascer: antes de codar, antes de dizer pronto e ao retomar.</p>
+  <div class="foot"><span>auxcode · skill para o Claude Code · 0.3.0</span><span>3</span></div>
+</section>
+
+<!-- ============================ 4 · O CICLO ============================ -->
+<section class="page">
+  <div class="ovf"></div>
+  <p class="kicker">Como funciona</p>
+  <h1>O ciclo em cinco passos</h1>
+  <p>Tudo o que a skill faz cabe num ciclo. Ele roda uma vez por pedido e recomeça na sessão seguinte ou no próximo item da etapa. Quando a abordagem muda ou aparece trabalho extra no meio do caminho, o modelo volta ao passo 2 e refaz a linha.</p>
+
+  <figure>
+    <svg viewBox="0 0 660 214" role="img" aria-label="Cinco passos em sequência com retorno ao início; do passo alinhar sai um desvio para o caso sem sustentação, que vai ao backlog com uma pergunta em vez de virar código">
+      <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1b1f24"/></marker><marker id="g2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5b6470"/></marker></defs>
+      <rect class="n-warn" x="130" y="6" width="330" height="42" rx="7"/>
+      <text class="t-b" x="295" y="23" text-anchor="middle">Sem item, regra ou defeito que sustente o pedido<tspan class="t-s" x="295" dy="14">não implementa: backlog do projeto + uma pergunta</tspan></text>
+      <path class="e-g" d="M196.5 90V49" marker-end="url(#g2)"/>
+      <text class="t-xs" x="203" y="74">não</text>
+      <rect class="n" x="4" y="90" width="118" height="52" rx="7"/>
+      <rect class="n-acc" x="137.5" y="90" width="118" height="52" rx="7"/>
+      <rect class="n" x="271" y="90" width="118" height="52" rx="7"/>
+      <rect class="n" x="404.5" y="90" width="118" height="52" rx="7"/>
+      <rect class="n-acc" x="538" y="90" width="118" height="52" rx="7"/>
+      <text class="t-b" x="63" y="113" text-anchor="middle">1 Retomar<tspan class="t-s" x="63" dy="15">lê o mínimo</tspan></text>
+      <text class="t-b" x="196.5" y="113" text-anchor="middle">2 Alinhar<tspan class="t-s" x="196.5" dy="15">motivo + critério</tspan></text>
+      <text class="t-b" x="330" y="113" text-anchor="middle">3 Executar<tspan class="t-s" x="330" dy="15">só o pedido</tspan></text>
+      <text class="t-b" x="463.5" y="113" text-anchor="middle">4 Provar<tspan class="t-s" x="463.5" dy="15">evidência real</tspan></text>
+      <text class="t-b" x="597" y="113" text-anchor="middle">5 Checkpoint<tspan class="t-s" x="597" dy="15">um só, atual</tspan></text>
+      <text class="t-xs" x="129.75" y="84" text-anchor="middle">estado</text>
+      <text class="t-xs" x="263.25" y="84" text-anchor="middle">linha</text>
+      <text class="t-xs" x="396.75" y="84" text-anchor="middle">diff</text>
+      <text class="t-xs" x="530.25" y="84" text-anchor="middle">prova</text>
+      <path class="e" d="M122 116H137.5" marker-end="url(#a2)"/>
+      <path class="e" d="M255.5 116H271" marker-end="url(#a2)"/>
+      <path class="e" d="M389 116H404.5" marker-end="url(#a2)"/>
+      <path class="e" d="M522.5 116H538" marker-end="url(#a2)"/>
+      <path class="e" d="M597 142V180H63V143" marker-end="url(#a2)"/>
+      <text class="t-s" x="330" y="200" text-anchor="middle">sessão nova · próximo item da etapa · mudança de abordagem volta ao passo 2</text>
+    </svg>
+    <figcaption>O ciclo completo. Os passos em destaque são os dois instrumentos: a linha de alinhamento e o checkpoint. O desvio tracejado é o que impede código sem motivo.</figcaption>
+  </figure>
+
+  <div class="grid5">
+    <div class="step"><h3><span class="num">1</span>Retomar</h3><p>Lê o mapa de fontes, o checkpoint e só as fontes da tarefa ativa. Do roadmap, a etapa atual e a seguinte. Confere o checkpoint contra branch, testes e deploy.</p></div>
+    <div class="step"><h3><span class="num">2</span>Alinhar</h3><p>Escreve a linha de alinhamento no chat. Sem sustentação, não implementa: anota no backlog e faz a menor pergunta que decide.</p></div>
+    <div class="step"><h3><span class="num">3</span>Executar</h3><p>Só o que a linha cobre, mais dependências técnicas. Melhoria não pedida vira uma linha no backlog. Defeito só com esperado e observado registrados.</p></div>
+    <div class="step"><h3><span class="num">4</span>Provar</h3><p>Valida pelo critério da linha, no fluxo afetado. Revisa o diff contra o pedido. Relata feito, verificado, publicado e o que ficou sem verificar.</p></div>
+    <div class="step"><h3><span class="num">5</span>Checkpoint</h3><p>Substitui o anterior: tarefa, estado, próximo passo, decisões, descartados, fora do escopo. O próximo passo é o próximo item da etapa.</p></div>
+  </div>
+
+  <div class="note">Nada disso exige reler o roadmap inteiro a cada comando, emitir relatórios cerimoniais ou pedir aprovação repetida. A linha é uma frase; o relato, três palavras e uma lista curta; o checkpoint, meia tela.</div>
+  <div class="foot"><span>auxcode · skill para o Claude Code · 0.3.0</span><span>4</span></div>
+</section>
+
+<!-- ============================ 5 · LINHA DE ALINHAMENTO ============================ -->
+<section class="page">
+  <div class="ovf"></div>
+  <p class="kicker">Instrumento 1</p>
+  <h1>A linha de alinhamento</h1>
+  <p>É uma frase com forma fixa, escrita no chat antes de qualquer código. Ela obriga o modelo a tornar explícita a ligação entre o que vai fazer e o motivo, e define desde o início o que vai contar como "pronto". Como a forma é sempre a mesma, você confere em dois segundos.</p>
+
+  <figure>
+    <svg viewBox="0 0 660 112" role="img" aria-label="Anatomia da linha de alinhamento: pedido, verbo atende, uma das três sustentações, a fonte e o critério observável">
+      <rect class="n-soft" x="6" y="28" width="96" height="36" rx="6"/>
+      <rect class="n" x="110" y="28" width="62" height="36" rx="6"/>
+      <rect class="n-acc" x="180" y="28" width="204" height="36" rx="6"/>
+      <rect class="n" x="392" y="28" width="92" height="36" rx="6"/>
+      <rect class="n-acc" x="492" y="28" width="162" height="36" rx="6"/>
+      <text class="t" x="54" y="50" text-anchor="middle">‹pedido›</text>
+      <text class="t-b" x="141" y="50" text-anchor="middle">atende</text>
+      <text class="t" x="282" y="50" text-anchor="middle">item do roadmap · regra · defeito</text>
+      <text class="t" x="438" y="50" text-anchor="middle">em ‹fonte›</text>
+      <text class="t" x="573" y="50" text-anchor="middle"><tspan class="t-b">Pronto quando:</tspan> ‹critério›</text>
+      <text class="t-xs" x="54" y="84" text-anchor="middle">nas palavras<tspan x="54" dy="12">do usuário</tspan></text>
+      <text class="t-xs" x="141" y="84" text-anchor="middle">verbo fixo,<tspan x="141" dy="12">sempre igual</tspan></text>
+      <text class="t-xs" x="282" y="84" text-anchor="middle">uma das três<tspan x="282" dy="12">sustentações</tspan></text>
+      <text class="t-xs" x="438" y="84" text-anchor="middle">arquivo ou seção<tspan x="438" dy="12">que prova</tspan></text>
+      <text class="t-xs" x="573" y="84" text-anchor="middle">observável: teste,<tspan x="573" dy="12">número, comportamento</tspan></text>
+    </svg>
+    <figcaption>As cinco partes da linha. As duas em destaque são as que fazem o trabalho: a sustentação e o critério.</figcaption>
+  </figure>
+
+  <figure>
+    <svg viewBox="0 0 660 196" role="img" aria-label="Árvore de decisão: se o pedido tem sustentação em item do roadmap, regra do projeto ou defeito comprovado, o modelo escreve a linha e executa; se não tem, anota no backlog e pergunta, sem código">
+      <defs><marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1b1f24"/></marker></defs>
+      <polygon class="n" points="100,28 190,70 100,112 10,70"/>
+      <text class="t-b" x="100" y="67" text-anchor="middle">O pedido tem<tspan x="100" dy="14">sustentação?</tspan></text>
+      <rect class="n-acc" x="240" y="14" width="190" height="34" rx="6"/>
+      <rect class="n-acc" x="240" y="53" width="190" height="34" rx="6"/>
+      <rect class="n-acc" x="240" y="92" width="190" height="34" rx="6"/>
+      <text class="t" x="335" y="35" text-anchor="middle">item do roadmap (etapa atual)</text>
+      <text class="t" x="335" y="74" text-anchor="middle">regra ou decisão do projeto</text>
+      <text class="t" x="335" y="113" text-anchor="middle">defeito: esperado × observado</text>
+      <path class="e" d="M190 70H215"/><path class="e" d="M215 31V109"/>
+      <path class="e" d="M215 31H240" marker-end="url(#a3)"/><path class="e" d="M215 70H240" marker-end="url(#a3)"/><path class="e" d="M215 109H240" marker-end="url(#a3)"/>
+      <text class="t-xs" x="200" y="62">sim</text>
+      <path class="e" d="M430 31H455V109"/><path class="e" d="M430 70H455"/><path class="e" d="M430 109H455"/>
+      <path class="e" d="M455 70H480" marker-end="url(#a3)"/>
+      <rect class="n-ok" x="480" y="52" width="172" height="36" rx="6"/>
+      <text class="t-b" x="566" y="74" text-anchor="middle">Escreve a linha e executa</text>
+      <path class="e" d="M100 112V145" marker-end="url(#a3)"/>
+      <text class="t-xs" x="108" y="134">não</text>
+      <rect class="n-warn" x="10" y="146" width="330" height="40" rx="6"/>
+      <text class="t-b" x="175" y="163" text-anchor="middle">Não implementa.<tspan class="t-s" x="175" dy="14">Anota no backlog do projeto e pergunta só o que decide.</tspan></text>
+    </svg>
+    <figcaption>A decisão que a linha força. Um "não" aqui é o que separa um auxiliar disciplinado de um gerador de código.</figcaption>
+  </figure>
+
+  <h2>Três exemplos</h2>
+<pre>Alinhamento: paginar a lista de pedidos atende Etapa 2, item 3, em docs/ROADMAP.md.
+Pronto quando: 1.000 pedidos carregam em páginas de 50 e o teste de paginação passa.</pre>
+<pre>Alinhamento: corrigir o total com desconto atende a regra "total nunca negativo" em
+docs/adr/ADR-009.md; defeito observado no teste test_total_desconto.
+Pronto quando: o teste falha sem a correção e passa com ela.</pre>
+<pre>Sem item, regra ou defeito que sustente "adicionar tema escuro". Anotado em
+docs/ROADMAP.md §Backlog. Quer priorizar agora ou seguimos na Etapa 2?</pre>
+  <p class="small muted">Critério observável é o que dá para ver ou medir: um teste, um número, um comportamento na tela. "Funcionar bem" e "ficar melhor" não servem.</p>
+  <div class="foot"><span>auxcode · skill para o Claude Code · 0.3.0</span><span>5</span></div>
+</section>
+
+<!-- ============================ 6 · RETOMAR LENDO O MÍNIMO ============================ -->
+<section class="page">
+  <div class="ovf"></div>
+  <p class="kicker">Retomada</p>
+  <h1>Retomar lendo o mínimo</h1>
+  <p>O maior desperdício de uma sessão nova é reconstruir o contexto do zero. A skill troca isso por uma ordem de leitura fixa e curta: primeiro o mapa de fontes, depois o checkpoint, depois só as fontes que o checkpoint aponta para a tarefa ativa. Do roadmap, apenas a etapa atual e a seguinte. Busca ampla em muitos arquivos vai para um subagente, que devolve só a conclusão.</p>
+
+  <figure>
+    <svg viewBox="0 0 660 184" role="img" aria-label="Comparação do contexto ocupado: sem disciplina, seis documentos inteiros entram e ocupam quase todo o contexto; com a skill, mapa, checkpoint e fontes da tarefa ocupam uma fração e o resto fica livre para o trabalho">
+      <defs><marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1b1f24"/></marker></defs>
+      <text class="t-b" x="8" y="16">Sem disciplina</text>
+      <rect class="n-soft" x="8" y="30" width="150" height="20" rx="4"/><text class="t-s" x="16" y="44">README</text>
+      <rect class="n-soft" x="8" y="54" width="150" height="20" rx="4"/><text class="t-s" x="16" y="68">ROADMAP inteiro</text>
+      <rect class="n-soft" x="8" y="78" width="150" height="20" rx="4"/><text class="t-s" x="16" y="92">todas as decisões</text>
+      <rect class="n-soft" x="8" y="102" width="150" height="20" rx="4"/><text class="t-s" x="16" y="116">histórico</text>
+      <rect class="n-soft" x="8" y="126" width="150" height="20" rx="4"/><text class="t-s" x="16" y="140">STATUS</text>
+      <rect class="n-soft" x="8" y="150" width="150" height="20" rx="4"/><text class="t-s" x="16" y="164">código a esmo</text>
+      <path class="e" d="M158 98H198" marker-end="url(#a4)"/><text class="t-xs" x="178" y="92" text-anchor="middle">tudo</text>
+      <rect class="n" x="200" y="30" width="44" height="140" rx="4"/>
+      <rect x="201" y="45" width="42" height="124" fill="#fbeee4" stroke="none"/><rect x="201" y="45" width="42" height="124" fill="none" stroke="#b4531a" stroke-width="1"/>
+      <text class="t-xs" x="252" y="40">contexto</text>
+      <text class="t-xs t-warn" x="252" y="106">90% ocupado</text>
+      <text class="t-xs" x="252" y="120">10% livre para</text><text class="t-xs" x="252" y="132">o trabalho</text>
+
+      <text class="t-b" x="350" y="16">Com a skill</text>
+      <rect class="n-acc" x="350" y="30" width="170" height="24" rx="4"/><text class="t" x="435" y="46" text-anchor="middle">1 Mapa de fontes</text>
+      <rect class="n-acc" x="350" y="68" width="170" height="24" rx="4"/><text class="t" x="435" y="84" text-anchor="middle">2 Checkpoint</text>
+      <rect class="n-acc" x="350" y="106" width="170" height="24" rx="4"/><text class="t" x="435" y="122" text-anchor="middle">3 Fontes da tarefa ativa</text>
+      <path class="e" d="M435 54V67" marker-end="url(#a4)"/><path class="e" d="M435 92V105" marker-end="url(#a4)"/>
+      <text class="t-xs" x="350" y="150">do roadmap: só a etapa atual e a seguinte</text>
+      <text class="t-xs" x="350" y="163">busca ampla: subagente traz a conclusão</text>
+      <path class="e" d="M520 80H550" marker-end="url(#a4)"/>
+      <rect class="n" x="552" y="30" width="44" height="140" rx="4"/>
+      <rect x="553" y="127" width="42" height="42" fill="#e6f3ea" stroke="none"/><rect x="553" y="127" width="42" height="42" fill="none" stroke="#2f7d4f" stroke-width="1"/>
+      <text class="t-xs" x="602" y="40">contexto</text>
+      <text class="t-xs t-ok" x="602" y="106">30%</text><text class="t-xs t-ok" x="602" y="118">ocupado</text>
+      <text class="t-xs" x="602" y="138">70% livre</text>
+    </svg>
+    <figcaption>Proporções ilustrativas. O ponto não é o número, é a ordem: mapa, checkpoint, fontes da tarefa, e parar.</figcaption>
+  </figure>
+
+  <h2>O mapa de fontes</h2>
+  <p>Uma tabela de quatro linhas que quase não muda: só caminho, seção e papel. Ela responde "onde está o quê" para que o modelo não precise descobrir isso de novo a cada sessão.</p>
+  <table>
+    <tr><th>Papel</th><th>Onde</th><th>Nota</th></tr>
+    <tr><td>Propósito e público</td><td><code>docs/produto.md §1</code></td><td></td></tr>
+    <tr><td>Regras e decisões</td><td><code>docs/adr/</code>, índice em <code>docs/adr/README.md</code></td><td>ADR-012 substitui ADR-004</td></tr>
+    <tr><td>Roadmap e etapa atual</td><td><code>docs/ROADMAP.md §Etapa 2</code></td><td></td></tr>
+    <tr><td>Estado e evidências</td><td><code>docs/STATUS.md</code>, CI, ambiente de preview</td><td></td></tr>
+  </table>
+
+  <h2>Checkpoint é atalho, não prova</h2>
+  <figure>
+    <svg viewBox="0 0 660 108" role="img" aria-label="Fluxo de retomada: o checkpoint afirma um estado; o modelo confere branch, commit, testes e deploy; se bate, segue; se não bate, corrige o registro e então segue">
+      <defs><marker id="a5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1b1f24"/></marker></defs>
+      <rect class="n-acc" x="6" y="18" width="176" height="42" rx="6"/>
+      <text class="t-b" x="94" y="36" text-anchor="middle">Checkpoint diz:<tspan class="t-s" x="94" dy="14">tarefa X · feat/y · testes ok</tspan></text>
+      <path class="e" d="M182 39H210" marker-end="url(#a5)"/>
+      <rect class="n" x="212" y="18" width="176" height="42" rx="6"/>
+      <text class="t-b" x="300" y="36" text-anchor="middle">Confere o estado real<tspan class="t-s" x="300" dy="14">branch, commit, testes, deploy</tspan></text>
+      <path class="e" d="M388 39H410" marker-end="url(#a5)"/>
+      <polygon class="n" points="452,17 494,39 452,61 410,39"/>
+      <text class="t-b" x="452" y="43" text-anchor="middle">bate?</text>
+      <path class="e" d="M494 39H520" marker-end="url(#a5)"/><text class="t-xs" x="500" y="33">sim</text>
+      <rect class="n-ok" x="522" y="22" width="132" height="34" rx="6"/>
+      <text class="t-b" x="588" y="43" text-anchor="middle">segue</text>
+      <path class="e" d="M452 61V76" marker-end="url(#a5)"/><text class="t-xs" x="458" y="74">não</text>
+      <rect class="n-warn" x="352" y="78" width="200" height="24" rx="5"/>
+      <text class="t" x="452" y="94" text-anchor="middle">corrige o registro e então segue</text>
+    </svg>
+    <figcaption>Um registro antigo pode estar errado. Data recente não é garantia; o estado real dos arquivos é.</figcaption>
+  </figure>
+  <div class="foot"><span>auxcode · skill para o Claude Code · 0.3.0</span><span>6</span></div>
+</section>
+
+<!-- ============================ 7 · CHECKPOINT ============================ -->
+<section class="page">
+  <div class="ovf"></div>
+  <p class="kicker">Instrumento 2</p>
+  <h1>O checkpoint</h1>
+  <p>Meia tela de texto, gravada no arquivo de estado que o projeto já usa, substituída a cada marco. Registra só o que muda a próxima decisão. Não é diário: o anterior some, e o que merece durar vai para o documento certo.</p>
+
+  <div class="grid2">
+    <div>
+<div class="cp">
+<div class="h">Checkpoint — 2026-09-06 19:40 · feat/paginacao @ a1b2c3d</div>
+<div><b>Etapa:</b> 2 (docs/ROADMAP.md §Etapa 2)</div>
+<div><b>Tarefa:</b> paginar a lista de pedidos</div>
+<div><b>Pronto quando:</b> 1.000 pedidos em páginas de 50; teste de paginação passa</div>
+<div><b>Estado:</b> feito: endpoint e UI · verificado: teste e fluxo manual · publicado: não</div>
+<div><b>Próximo passo:</b> deploy em preview e conferir</div>
+<div><b>Decisões desta rodada:</b> cursor em vez de offset (ADR-014; substitui a nota da ADR-010)</div>
+<div><b>Fatos verificados:</b> 1.000 registros em 2,1 s</div>
+<div><b>Hipóteses abertas:</b> índice em created_at pode faltar</div>
+<div><b>Descartado:</b> paginação no cliente · lenta com 5.000</div>
+<div><b>Fora do escopo, anotado em:</b> ROADMAP §Backlog (filtro por período)</div>
+<div><b>Não verificado:</b> tema escuro · sem ferramenta visual</div>
+</div>
+    </div>
+    <div class="small">
+      <p><b>Cabeçalho.</b> Data, branch e commit. É o que a retomada confere contra o estado real; sem isso o checkpoint não vale como atalho.</p>
+      <p><b>Etapa, tarefa, pronto quando.</b> A linha de alinhamento, guardada. Quem retoma sabe o que estava sendo feito e o que conta como concluído.</p>
+      <p><b>Estado em três níveis.</b> Feito, verificado, publicado. "Publicado: não" evita o "achei que já estava no ar".</p>
+      <p><b>Decisões e o que substituem.</b> Por referência. A decisão em si vive no documento de decisões.</p>
+      <p><b>Fatos, hipóteses, descartados.</b> Separados de propósito. Um descartado com motivo é o que impede a tentativa repetida.</p>
+      <p><b>Fora do escopo e não verificado.</b> O que foi visto e não feito, e o que não pôde ser provado. Nada some em silêncio.</p>
+    </div>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 660 192" role="img" aria-label="Onde cada informação vive: da sessão de trabalho, decisões duráveis vão ao documento de decisões, o estado vai ao checkpoint substituído a cada marco, e o que ficou fora do escopo vai ao backlog">
+      <defs><marker id="a6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1b1f24"/></marker></defs>
+      <rect class="n" x="6" y="74" width="140" height="44" rx="7"/>
+      <text class="t-b" x="76" y="92" text-anchor="middle">Sessão de<tspan x="76" dy="14">trabalho</tspan></text>
+      <path class="e" d="M146 96H188V32H228" marker-end="url(#a6)"/>
+      <path class="e" d="M146 96H228" marker-end="url(#a6)"/>
+      <path class="e" d="M146 96H188V160H228" marker-end="url(#a6)"/>
+      <text class="t-xs" x="208" y="26" text-anchor="middle">durável</text>
+      <text class="t-xs" x="188" y="90" text-anchor="middle">estado</text>
+      <text class="t-xs" x="208" y="154" text-anchor="middle">extra</text>
+      <rect class="n-soft" x="230" y="6" width="424" height="52" rx="7"/>
+      <text class="t-b" x="244" y="26">Documento de decisões (ADR)<tspan class="t-s" x="244" dy="15">decisões duráveis e o que cada uma substitui</tspan></text>
+      <text class="t-xs" x="640" y="26" text-anchor="end">permanente</text>
+      <rect class="n-acc" x="230" y="70" width="424" height="52" rx="7"/>
+      <text class="t-b" x="244" y="90">Checkpoint<tspan class="t-s" x="244" dy="15">tarefa, estado, próximo passo, descartados, não verificado</tspan></text>
+      <text class="t-xs" x="640" y="90" text-anchor="end">substituído a cada marco</text>
+      <rect class="n-soft" x="230" y="134" width="424" height="52" rx="7"/>
+      <text class="t-b" x="244" y="154">Backlog / roadmap<tspan class="t-s" x="244" dy="15">fora do escopo, riscos e recomendações propostas</tspan></text>
+      <text class="t-xs" x="640" y="154" text-anchor="end">até ser priorizado</text>
+    </svg>
+    <figcaption>Três destinos, três tempos de vida. O checkpoint só referencia decisões; quem as guarda é o documento de decisões. É isso que permite substituí-lo sem perder nada.</figcaption>
+  </figure>
+
+  <p class="small muted">Regras do registro: omitir campo vazio; nada de logs, código ou segredo; atualizar em marcos, mudança de direção e encerramento, não a cada ação. Se não puder gravar arquivos, o modelo entrega o registro no chat e avisa que a retomada depende dele.</p>
+  <div class="foot"><span>auxcode · skill para o Claude Code · 0.3.0</span><span>7</span></div>
+</section>
+
+<!-- ============================ 8 · REVISAR ============================ -->
+<section class="page">
+  <div class="ovf"></div>
+  <p class="kicker">Aplicativo existente</p>
+  <h1>Revisar e adequar sem inventar regras</h1>
+  <p>Revisar um aplicativo é onde um agente mais tenta "melhorar" o que ninguém pediu. A skill resolve isso com duas regras: uma base de comparação com ordem definida e uma classe obrigatória para cada achado, que decide o que acontece com ele.</p>
+
+  <h2>Base de comparação, nesta ordem</h2>
+  <ol>
+    <li><b>Regras e decisões do projeto.</b> O que está escrito e foi aceito.</li>
+    <li><b>Diretrizes que o projeto adotou</b> de uma biblioteca, como o Guia de aplicativos.</li>
+    <li><b>Padrões que o próprio código já pratica.</b></li>
+  </ol>
+  <p>Norma genérica ou preferência do modelo não entra na lista. Regra praticada mas não escrita é proposta de regra, não desvio.</p>
+
+  <figure>
+    <svg viewBox="0 0 660 250" role="img" aria-label="Fluxo de revisão: da área pedida sai um achado com evidência, que recebe uma de três classes. Violação de regra é corrigida e validada. Defeito é corrigido se quebra a etapa atual ou uma regra, senão vai ao backlog. Risco ou recomendação é relatado e proposto, sem código sem aceite">
+      <defs><marker id="a7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1b1f24"/></marker></defs>
+      <rect class="n-soft" x="4" y="98" width="84" height="44" rx="6"/>
+      <text class="t-b" x="46" y="116" text-anchor="middle">Área<tspan x="46" dy="14">pedida</tspan></text>
+      <path class="e" d="M88 120H106" marker-end="url(#a7)"/>
+      <rect class="n" x="108" y="90" width="132" height="60" rx="6"/>
+      <text class="t-b" x="174" y="110" text-anchor="middle">Achado<tspan class="t-s" x="174" dy="14">+ evidência:</tspan><tspan class="t-s" x="174" dy="12">arquivo, teste, reprodução</tspan></text>
+      <path class="e" d="M240 120H256" marker-end="url(#a7)"/>
+      <polygon class="n" points="300,94 342,120 300,146 258,120"/>
+      <text class="t-b" x="300" y="124" text-anchor="middle">classe?</text>
+      <path class="e" d="M342 120H357V30H370" marker-end="url(#a7)"/>
+      <path class="e" d="M342 120H370" marker-end="url(#a7)"/>
+      <path class="e" d="M342 120H357V215H370" marker-end="url(#a7)"/>
+      <rect class="n-acc" x="372" y="10" width="150" height="40" rx="6"/>
+      <text class="t-b" x="447" y="34" text-anchor="middle">Viola regra do projeto</text>
+      <rect class="n" x="372" y="95" width="150" height="50" rx="6"/>
+      <text class="t-b" x="447" y="115" text-anchor="middle">Defeito<tspan class="t-s" x="447" dy="14">esperado × observado</tspan></text>
+      <rect class="n-soft" x="372" y="195" width="150" height="40" rx="6"/>
+      <text class="t-b" x="447" y="219" text-anchor="middle">Risco ou recomendação</text>
+      <path class="e" d="M522 30H556" marker-end="url(#a7)"/>
+      <rect class="n-ok" x="558" y="10" width="96" height="40" rx="6"/>
+      <text class="t-b" x="606" y="26" text-anchor="middle">Corrige<tspan x="606" dy="14">e valida</tspan></text>
+      <path class="e" d="M522 120H560" marker-end="url(#a7)"/>
+      <polygon class="n" points="606,92 652,120 606,148 560,120"/>
+      <text class="t-xs" x="606" y="117" text-anchor="middle" style="font-size:9px">quebra etapa<tspan x="606" dy="10">ou regra?</tspan></text>
+      <path class="e" d="M606 92V52" marker-end="url(#a7)"/><text class="t-xs" x="611" y="74">sim</text>
+      <path class="e" d="M606 148V162" marker-end="url(#a7)"/><text class="t-xs" x="612" y="160">não</text>
+      <rect class="n-soft" x="558" y="164" width="96" height="24" rx="5"/>
+      <text class="t" x="606" y="180" text-anchor="middle">backlog</text>
+      <path class="e" d="M522 215H556" marker-end="url(#a7)"/>
+      <rect class="n-soft" x="558" y="195" width="96" height="46" rx="6"/>
+      <text class="t-b" x="606" y="210" text-anchor="middle">Relata e propõe<tspan class="t-s" x="606" dy="12">sem aceite:</tspan><tspan class="t-s" x="606" dy="11">zero código</tspan></text>
+    </svg>
+    <figcaption>Cada achado sai com evidência e uma classe. Só duas classes viram código, e uma delas ainda passa por um filtro. A terceira vira proposta.</figcaption>
+  </figure>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>Pedido de adequação</h3>
+      <p>Corrige e valida cada item, priorizando por objetivo, etapa e dependência. Não termina só com recomendações.</p>
+    </div>
+    <div class="card">
+      <h3>Pedido só de diagnóstico</h3>
+      <p>Entrega os achados com evidência e classe. Não altera a implementação, nem "só um ajuste".</p>
+    </div>
+  </div>
+  <p class="small muted" style="margin-top:2.5mm">A inspeção não cresce além da área pedida. O que o modelo viu fora dela vira uma linha no backlog, não uma auditoria do sistema inteiro.</p>
+  <div class="foot"><span>auxcode · skill para o Claude Code · 0.3.0</span><span>8</span></div>
+</section>
+
+<!-- ============================ 9 · PROVAR ============================ -->
+<section class="page">
+  <div class="ovf"></div>
+  <p class="kicker">Antes de dizer pronto</p>
+  <h1>Provar que está pronto</h1>
+  <p>"Pronto" tem três significados diferentes e a conversa costuma misturá-los. A skill obriga o relato a separá-los e a dizer, junto, o que ficou sem verificar e por quê.</p>
+
+  <figure>
+    <svg viewBox="0 0 660 122" role="img" aria-label="Três estados em sequência: feito, verificado e publicado, com o que cada um exige e o falso amigo de cada um">
+      <defs><marker id="a8" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1b1f24"/></marker></defs>
+      <rect class="n" x="6" y="20" width="160" height="56" rx="7"/>
+      <rect class="n-acc" x="250" y="20" width="160" height="56" rx="7"/>
+      <rect class="n-ok" x="494" y="20" width="160" height="56" rx="7"/>
+      <text class="t-b" x="86" y="44" text-anchor="middle">Feito<tspan class="t-s" x="86" dy="15">código escrito, compila</tspan></text>
+      <text class="t-b" x="330" y="44" text-anchor="middle">Verificado<tspan class="t-s" x="330" dy="15">fluxo rodado pelo critério</tspan></text>
+      <text class="t-b" x="574" y="44" text-anchor="middle">Publicado<tspan class="t-s" x="574" dy="15">no ambiente real, conferido</tspan></text>
+      <path class="e" d="M166 48H248" marker-end="url(#a8)"/><text class="t-xs" x="207" y="41" text-anchor="middle">rodou o fluxo</text>
+      <path class="e" d="M410 48H492" marker-end="url(#a8)"/><text class="t-xs" x="451" y="41" text-anchor="middle">subiu e conferiu</text>
+      <text class="t-xs t-warn" x="86" y="100" text-anchor="middle">não é: "compilou"</text>
+      <text class="t-xs t-warn" x="330" y="100" text-anchor="middle">não é: "li o código"</text>
+      <text class="t-xs t-warn" x="574" y="100" text-anchor="middle">não é: "fiz o merge"</text>
+    </svg>
+    <figcaption>Os três estados e o falso amigo de cada um. Compilar não prova; inspecionar não é executar; merge não é publicação.</figcaption>
+  </figure>
+
+  <h2>Três regras contra erros que passam despercebidos</h2>
+  <div class="grid3">
+    <div class="card">
+      <h3>Teste novo tem que falhar sem a correção</h3>
+      <table style="margin:1.5mm 0">
+        <tr><th></th><th>falha</th><th>passa</th></tr>
+        <tr><td>sem a correção</td><td style="color:var(--ok);font-weight:600">esperado</td><td style="color:var(--warn)">não prova nada</td></tr>
+        <tr><td>com a correção</td><td style="color:var(--warn)">correção errada</td><td style="color:var(--ok);font-weight:600">esperado</td></tr>
+      </table>
+      <p>Um teste escrito junto com a correção costuma passar nos dois casos. Verde assim é verde por motivo errado.</p>
+    </div>
+    <div class="card">
+      <h3>Ausência exige contagem, não amostra</h3>
+<pre style="margin:1.5mm 0">$ tail -12 app.log
+… nada de errado …
+
+$ grep -c ERRO app.log
+37</pre>
+      <p>"Não há X" só vale com a contagem completa. Saída cortada é evidência cortada. Agregar com contagem ou filtro também poupa contexto.</p>
+    </div>
+    <div class="card">
+      <h3>Diga o que ficou sem verificar</h3>
+      <p>Interface sem ferramenta visual, ambiente sem acesso, dado de produção indisponível: acontece. O relato nomeia o que não foi provado e por quê, em vez de declarar sucesso integral.</p>
+      <p style="margin-top:1.5mm">Antes disso, o diff é revisto contra o pedido e acréscimos sem justificativa são removidos.</p>
+    </div>
+  </div>
+
+  <div class="note">No roadmap, um item só é marcado como concluído com evidência. Constar no plano, ou até constar como feito no plano, não é conclusão.</div>
+  <div class="foot"><span>auxcode · skill para o Claude Code · 0.3.0</span><span>9</span></div>
+</section>
+
+<!-- ============================ 10 · TRÊS PORTAS ============================ -->
+<section class="page">
+  <div class="ovf"></div>
+  <p class="kicker">Situações de uso</p>
+  <h1>Três portas de entrada</h1>
+  <p>A skill serve para um aplicativo novo e para um que já existe, com ou sem documentação organizada. Ela não exige reorganizar nada: usa o arquivo de estado que o projeto já tem e só cria um quando não há equivalente. O que muda em cada caso é o que acontece antes da primeira linha de alinhamento.</p>
+
+  <figure>
+    <svg viewBox="0 0 660 286" role="img" aria-label="Três colunas: aplicativo do zero define propósito, regras e primeira etapa antes de implementar; projeto em andamento sem estrutura ganha uma proposta mínima derivada do que existe, aceita e gravada; projeto com estrutura lê mapa e checkpoint, confere e segue">
+      <defs><marker id="a9" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1b1f24"/></marker></defs>
+      <text class="t-b" x="110" y="16" text-anchor="middle">Aplicativo do zero</text>
+      <text class="t-b" x="330" y="16" text-anchor="middle">Em andamento, sem estrutura</text>
+      <text class="t-b" x="550" y="16" text-anchor="middle">Em andamento, com estrutura</text>
+      <!-- col 1 -->
+      <rect class="n" x="6" y="30" width="208" height="36" rx="6"/><text class="t" x="110" y="52" text-anchor="middle">Propósito e público</text>
+      <rect class="n" x="6" y="78" width="208" height="36" rx="6"/><text class="t" x="110" y="100" text-anchor="middle">Regras iniciais</text>
+      <rect class="n" x="6" y="126" width="208" height="36" rx="6"/><text class="t" x="110" y="148" text-anchor="middle">Primeira etapa</text>
+      <rect class="n-acc" x="6" y="174" width="208" height="36" rx="6"/><text class="t" x="110" y="196" text-anchor="middle">Grava no projeto</text>
+      <rect class="n" x="6" y="222" width="208" height="36" rx="6"/><text class="t" x="110" y="244" text-anchor="middle">Só então implementa</text>
+      <path class="e" d="M110 66V77" marker-end="url(#a9)"/><path class="e" d="M110 114V125" marker-end="url(#a9)"/><path class="e" d="M110 162V173" marker-end="url(#a9)"/><path class="e" d="M110 210V221" marker-end="url(#a9)"/>
+      <!-- col 2 -->
+      <rect class="n" x="226" y="30" width="208" height="36" rx="6"/><text class="t" x="330" y="46" text-anchor="middle">Lê o que existe<tspan class="t-s" x="330" dy="13">código, docs, commits, issues</tspan></text>
+      <rect class="n" x="226" y="78" width="208" height="36" rx="6"/><text class="t" x="330" y="94" text-anchor="middle">Propõe o mínimo<tspan class="t-s" x="330" dy="13">propósito, regras praticadas, etapa, mapa</tspan></text>
+      <rect class="n" x="226" y="126" width="208" height="36" rx="6"/><text class="t" x="330" y="148" text-anchor="middle">Aceite do usuário</text>
+      <rect class="n-acc" x="226" y="174" width="208" height="36" rx="6"/><text class="t" x="330" y="196" text-anchor="middle">Grava no projeto</text>
+      <rect class="n" x="226" y="222" width="208" height="36" rx="6"/><text class="t" x="330" y="244" text-anchor="middle">Segue com a linha</text>
+      <path class="e" d="M330 66V77" marker-end="url(#a9)"/><path class="e" d="M330 114V125" marker-end="url(#a9)"/><path class="e" d="M330 162V173" marker-end="url(#a9)"/><path class="e" d="M330 210V221" marker-end="url(#a9)"/>
+      <!-- col 3 -->
+      <rect class="n-acc" x="446" y="30" width="208" height="36" rx="6"/><text class="t" x="550" y="52" text-anchor="middle">Lê mapa + checkpoint</text>
+      <rect class="n" x="446" y="78" width="208" height="36" rx="6"/><text class="t" x="550" y="100" text-anchor="middle">Confere o estado real</text>
+      <rect class="n-acc" x="446" y="126" width="208" height="36" rx="6"/><text class="t" x="550" y="148" text-anchor="middle">Linha de alinhamento</text>
+      <rect class="n" x="446" y="174" width="208" height="36" rx="6"/><text class="t" x="550" y="196" text-anchor="middle">Segue</text>
+      <path class="e" d="M550 66V77" marker-end="url(#a9)"/><path class="e" d="M550 114V125" marker-end="url(#a9)"/><path class="e" d="M550 162V173" marker-end="url(#a9)"/>
+      <text class="t-xs" x="110" y="278" text-anchor="middle">custo de entrada: uma conversa</text>
+      <text class="t-xs" x="330" y="278" text-anchor="middle">custo de entrada: parte da primeira sessão, uma vez</text>
+      <text class="t-xs" x="550" y="278" text-anchor="middle">custo de entrada: duas leituras</text>
+    </svg>
+    <figcaption>As três portas convergem no mesmo ponto: um projeto com propósito, regras, etapa e lugar de estado, e a partir daí o ciclo de cinco passos.</figcaption>
+  </figure>
+
+  <div class="grid3">
+    <div class="card"><h3>Do zero</h3><p>Nada de funcionalidades antes de propósito, público, regras iniciais e primeira etapa. Propostas do modelo são propostas até serem aceitas; ele não inventa público, prazo nem prioridade.</p></div>
+    <div class="card"><h3>Sem estrutura</h3><p>O projeto não trava nem é obrigado a se reorganizar. A proposta mínima é curta: uma linha de propósito, as regras que o código já pratica, a etapa atual e a seguinte, o mapa. Depois do aceite, o projeto passa a ter estrutura.</p></div>
+    <div class="card"><h3>Com estrutura</h3><p>O caminho rápido. Se o projeto segue o Guia de aplicativos, o documento de parâmetros é a fonte de propósito e regras que a skill procura primeiro.</p></div>
+  </div>
+  <div class="foot"><span>auxcode · skill para o Claude Code · 0.3.0</span><span>10</span></div>
+</section>
+
+<!-- ============================ 11 · POR DENTRO ============================ -->
+<section class="page">
+  <div class="ovf"></div>
+  <p class="kicker">Mecânica</p>
+  <h1>Como funciona por dentro</h1>
+  <p>Uma skill do Claude Code é uma pasta com um arquivo de instruções. Não há código rodando, monitor ou plugin: quando a skill é invocada, o texto entra na conversa e o modelo passa a segui-lo. Tudo o que precisa durar além da sessão fica em arquivos do seu projeto.</p>
+
+  <figure>
+    <svg viewBox="0 0 660 234" role="img" aria-label="Três áreas: a pasta da skill com as instruções e os modelos; a sessão do Claude Code, onde a skill é listada, invocada e entra no contexto; e o projeto, onde ficam mapa, checkpoint, backlog, decisões e código. As instruções entram ao invocar; os modelos só ao gravar; a sessão lê e grava no projeto">
+      <defs><marker id="a10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1b1f24"/></marker><marker id="g10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#5b6470"/></marker></defs>
+      <rect class="box" x="6" y="20" width="170" height="204" rx="8"/>
+      <text class="t-b" x="18" y="40">Pasta da skill</text>
+      <rect class="n-acc" x="18" y="60" width="146" height="44" rx="6"/>
+      <text class="t-b" x="91" y="78" text-anchor="middle">SKILL.md<tspan class="t-s" x="91" dy="14">instruções, ~2 mil tokens</tspan></text>
+      <rect class="n" x="18" y="130" width="146" height="44" rx="6"/>
+      <text class="t-b" x="91" y="148" text-anchor="middle">checkpoint.md<tspan class="t-s" x="91" dy="14">modelos, sob demanda</tspan></text>
+
+      <rect class="box" x="256" y="20" width="200" height="204" rx="8"/>
+      <text class="t-b" x="268" y="40">Sessão do Claude Code</text>
+      <rect class="n-soft" x="268" y="52" width="176" height="30" rx="6"/>
+      <text class="t" x="356" y="71" text-anchor="middle">listagem: nome + descrição</text>
+      <path class="e" d="M356 82V97" marker-end="url(#a10)"/>
+      <rect class="n-acc" x="268" y="98" width="176" height="44" rx="6"/>
+      <text class="t-b" x="356" y="116" text-anchor="middle">/auxcode<tspan class="t-s" x="356" dy="14">ou seleção automática</tspan></text>
+      <path class="e" d="M356 142V157" marker-end="url(#a10)"/>
+      <rect class="n" x="268" y="158" width="176" height="52" rx="6"/>
+      <text class="t-b" x="356" y="176" text-anchor="middle">contexto<tspan class="t-s" x="356" dy="13">instruções + trabalho</tspan><tspan class="t-s" x="356" dy="12">reanexado na compactação</tspan></text>
+
+      <rect class="box" x="496" y="20" width="158" height="204" rx="8"/>
+      <text class="t-b" x="508" y="40">Seu projeto</text>
+      <rect class="n" x="508" y="52" width="134" height="24" rx="5"/><text class="t" x="575" y="68" text-anchor="middle">mapa de fontes</text>
+      <rect class="n-acc" x="508" y="84" width="134" height="24" rx="5"/><text class="t" x="575" y="100" text-anchor="middle">checkpoint</text>
+      <rect class="n" x="508" y="116" width="134" height="24" rx="5"/><text class="t" x="575" y="132" text-anchor="middle">backlog / roadmap</text>
+      <rect class="n" x="508" y="148" width="134" height="24" rx="5"/><text class="t" x="575" y="164" text-anchor="middle">decisões (ADR)</text>
+      <rect class="n" x="508" y="180" width="134" height="24" rx="5"/><text class="t" x="575" y="196" text-anchor="middle">código</text>
+
+      <path class="e" d="M164 82H210V120H266" marker-end="url(#a10)"/>
+      <text class="t-xs" x="212" y="76" text-anchor="middle">ao invocar</text>
+      <path class="e-g" d="M164 152H210V184H266" marker-end="url(#g10)"/>
+      <text class="t-xs" x="212" y="146" text-anchor="middle">só ao gravar</text>
+      <path class="e" d="M444 172H494" marker-end="url(#a10)"/>
+      <text class="t-xs" x="470" y="166" text-anchor="middle">grava</text>
+      <path class="e" d="M496 192H446" marker-end="url(#a10)"/>
+      <text class="t-xs" x="470" y="206" text-anchor="middle">lê</text>
+    </svg>
+    <figcaption>O que entra na sessão e o que fica no projeto. A seta tracejada é a leitura sob demanda: os modelos não custam contexto até serem necessários.</figcaption>
+  </figure>
+
+  <div class="grid2">
+    <div>
+      <h2>Invocação</h2>
+      <p>Por comando, <code>/auxcode &lt;pedido&gt;</code>, ou por seleção automática: a descrição da skill diz quando ela se aplica, e frases como "retoma", "o que falta para fechar a etapa" ou "revise este app" acionam o carregamento sem comando.</p>
+      <h2>O que custa contexto</h2>
+      <p>O arquivo de instruções, cerca de 2 mil tokens, uma vez por invocação. Os modelos de checkpoint só quando o modelo vai gravar. A economia real vem do comportamento: ler menos, não repetir tentativas e não escrever código fora do escopo.</p>
+    </div>
+    <div>
+      <h2>Sessões longas</h2>
+      <p>Quando a conversa é compactada, o Claude Code reanexa a invocação mais recente de cada skill, até 5.000 tokens por skill e 25.000 no total. Esta skill cabe inteira. O que não sobrevive à compactação é o raciocínio da sessão; por isso o estado fica no checkpoint em disco, não na memória do modelo.</p>
+      <h2>O que ela não toca</h2>
+      <p>A skill não edita <code>CLAUDE.md</code>, configurações nem hooks para se instalar. Quem decide integrá-la ao <code>CLAUDE.md</code> de um projeto é você, com uma referência de três linhas.</p>
+    </div>
+  </div>
+  <div class="foot"><span>auxcode · skill para o Claude Code · 0.3.0</span><span>11</span></div>
+</section>
+
+<!-- ============================ 12 · INSTALAR ============================ -->
+<section class="page">
+  <div class="ovf"></div>
+  <p class="kicker">Na prática</p>
+  <h1>Instalar, usar e limites</h1>
+
+  <div class="grid2">
+    <div>
+      <h2>Instalação</h2>
+      <p>Clone o repositório direto no destino. Só <code>SKILL.md</code> e <code>checkpoint.md</code> entram em uso; o resto é documentação. Se a pasta de skills não existia quando a sessão começou, reinicie o Claude Code. Para atualizar, <code>git pull</code> na mesma pasta.</p>
+      <table>
+        <tr><th>Uso</th><th>Destino</th></tr>
+        <tr><td>Só num projeto</td><td><code>&lt;projeto&gt;/.claude/skills/auxcode/</code></td></tr>
+        <tr><td>Pessoal, em todos</td><td><code>~/.claude/skills/auxcode/</code></td></tr>
+      </table>
+<pre>git clone https://github.com/pnetopsx/auxcode.git ~/.claude/skills/auxcode</pre>
+      <h2>Quatro pedidos típicos</h2>
+<pre>/auxcode Quero começar um app de agenda. Defina comigo propósito, regras e a primeira etapa antes de escolher funcionalidades.</pre>
+<pre>/auxcode revisar o fluxo de cadastro contra as regras deste projeto. Corrija os desvios comprovados e valide o fluxo.</pre>
+<pre>/auxcode Verifique o cálculo do fechamento. Só diagnóstico, com evidências; não altere arquivos.</pre>
+<pre>/auxcode retomar</pre>
+    </div>
+    <div>
+      <h2>O que você vai ver</h2>
+      <ol>
+        <li>Antes de qualquer código, a linha <code>Alinhamento: …</code>. Se ela não fechar, o pedido vai ao backlog e vira pergunta.</li>
+        <li>Numa revisão, achados com evidência e classe; correções validadas uma a uma quando o pedido foi adequar.</li>
+        <li>No fim, o relato em feito, verificado e publicado, o que ficou sem verificar, e o checkpoint substituído no arquivo de estado do projeto.</li>
+        <li>Na retomada, leitura de mapa, checkpoint e fontes da tarefa, com o checkpoint conferido contra o estado real.</li>
+      </ol>
+
+      <h2>Integração opcional</h2>
+      <p>No <code>CLAUDE.md</code> do aplicativo, três linhas bastam para lembrar a skill e apontar o arquivo de estado:</p>
+<pre>Neste aplicativo, aplique a skill auxcode. Estado de trabalho (mapa e checkpoint): docs/STATUS.md. Na retomada, leia-o primeiro e confira-o contra o estado real antes de continuar.</pre>
+
+      <h2>Limites e estado atual</h2>
+      <p>A skill orienta decisões e registros. Não é um monitor automático, não mede tokens nem percentuais de contexto e não garante ausência de erro ou cumprimento de prazo. Depende de o projeto ter, ou passar a ter, um roadmap e um lugar de estado.</p>
+      <div class="note warn">Versão 0.3.0, setembro de 2026. Estrutura validada; o ensaio em projetos reais está em andamento. O que você observar no uso é a próxima evidência: relate.</div>
+    </div>
+  </div>
+
+  <p class="small muted" style="margin-top:2mm">Repositório: <code>github.com/pnetopsx/auxcode</code>, licença MIT. Documentação oficial de skills: <code>code.claude.com/docs/en/skills</code>.</p>
+  <div class="foot"><span>auxcode · skill para o Claude Code · 0.3.0</span><span>12</span></div>
+</section>
+
+<script>
+  // Marca visualmente páginas cujo conteúdo estoura a altura (só para conferência).
+  document.querySelectorAll('.page').forEach(function(p){
+    var over = p.scrollHeight - p.clientHeight;
+    var b = p.querySelector('.ovf');
+    if (over > 1 && b) { b.textContent = 'OVERFLOW +' + over + 'px'; b.style.display = 'block'; }
+    p.setAttribute('data-over', over);
+  });
+</script>
+</body>
+</html>
