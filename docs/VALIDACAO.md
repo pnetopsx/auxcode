@@ -1,5 +1,18 @@
 # Validação — auxcode
 
+## 0.4.0 — 6 de setembro de 2026
+
+Acréscimo de corpo de informação do projeto (`projeto.md`) e de quatro regras contra suposição. **Sem nova evidência de uso real nesta versão.** As regras vêm de lições registradas em projetos do autor (trabalho visual sem referência custou rodadas em duas ocasiões; regras com identificador foram o que tornou a revisão da 0.3.x citável), não de ensaio desta skill.
+
+- Frontmatter reanalisado com `YAML.safe_load` (Ruby/Psych): `name` igual a `auxcode`, descrição com 439 caracteres, `when_to_use` com 301, combinado de 740. Corpo com 1136 palavras. Links para `checkpoint.md` e `projeto.md` resolvem.
+- Custo por invocação subiu com o corpo; `projeto.md` não entra no contexto até ser lido.
+
+```text
+f2f4920f965289abd2c807e232549bd7144a3b742422ebcc39c25ca6b5382376  SKILL.md
+d84b254eaee9cff1a4f4182f75428db3f3ef173f14e0b8a3800edd42ae62941d  checkpoint.md
+b1e61f67b8ea77c73649dc33d62782a02ade958a458b4b133926781be18f7164  projeto.md
+```
+
 ## 0.3.1 — 6 de setembro de 2026
 
 Primeiras evidências de uso real, em duas sessões novas do Claude Code sobre um projeto privado com `docs/STATUS.md` e roadmap, observadas pelo autor e avaliadas pelo agente que escreveu a skill:

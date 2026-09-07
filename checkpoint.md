@@ -26,6 +26,7 @@ Só caminho/seção e papel. Fonte substituída: diga por qual, em vez de mantê
 **Decisões desta rodada:** <decisão · fonte · o que substitui>
 **Fatos verificados:** <…>
 **Hipóteses abertas:** <…>
+**Suposições abertas:** <o quê · quem confirma>
 **Descartado:** <tentativa · motivo, para não repetir>
 **Fora do escopo, anotado em:** <onde no backlog/roadmap>
 **Não verificado:** <o que · por quê>

@@ -7,17 +7,17 @@ argument-hint: <pedido, "retomar" ou "revisar">
 
 # auxcode
 
-Meta: nenhum código sem item do roadmap, regra do projeto ou defeito comprovado que o sustente; nada dado por pronto sem evidência; retomada lendo o mínimo. Os instrumentos são a **linha de alinhamento** e o **checkpoint**; modelos em [checkpoint.md](checkpoint.md).
+Meta: nenhum código sem item do roadmap, regra do projeto ou defeito comprovado que o sustente; nada dado por pronto sem evidência; retomada lendo o mínimo. Os instrumentos são a **linha de alinhamento** e o **checkpoint**; modelos em [checkpoint.md](checkpoint.md). O briefing mínimo do projeto, com glossário, regras com identificador e roadmap com critério, está em [projeto.md](projeto.md).
 
 ## 1. Começar ou retomar: leia o mínimo
 
 1. Leia só isto, nesta ordem: o mapa de fontes e o checkpoint do projeto; depois apenas as fontes que o checkpoint aponta para a tarefa ativa. Do roadmap, só a etapa atual e a seguinte. Não varra a árvore de docs nem releia histórico. Busca ampla em muitos arquivos: delegue a um subagente e traga só a conclusão.
 2. Checkpoint é atalho, não prova. Confira tarefa ativa, branch/commit, testes e deploy contra o estado real antes de continuar; corrija a divergência no registro.
 3. Sem mapa ou checkpoint: localize propósito, regras/decisões e roadmap pelos arquivos de instrução e índices do projeto e crie os dois no local que o projeto já usa para estado de trabalho; se não houver, `docs/contexto-de-trabalho.md`. Se o projeto segue o Guia de aplicativos, o documento de parâmetros do projeto é a fonte de propósito e regras. Não edite CLAUDE.md, configurações ou hooks para isso.
-4. Projeto em andamento sem roadmap, regras ou estado escritos: não pare nem exija reorganização. Derive do que existe (código, docs, commits recentes, issues) uma proposta mínima: propósito em uma linha, regras que o código já pratica, etapa atual e a seguinte, mapa de fontes. Apresente para aceite, grave no projeto e siga. Aplicativo do zero: defina com o usuário propósito, público, regras iniciais e a primeira etapa antes de escolher funcionalidades; grave e só então implemente.
+4. Projeto em andamento sem roadmap, regras ou estado escritos: não pare nem exija reorganização. Derive do que existe (código, docs, commits recentes, issues) uma proposta mínima no formato do briefing de [projeto.md](projeto.md): propósito em uma linha, público, regras que o código já pratica com identificador, glossário dos termos do domínio, etapa atual e a seguinte com critério observável, mapa de fontes. Apresente para aceite, grave no projeto e siga. Aplicativo do zero: preencha o briefing com o usuário (problema e resultado, público, jornadas, fora do escopo, restrições, referências visuais) antes de escolher funcionalidades; grave e só então implemente.
 5. Antes de tocar em código, escreva uma linha no chat:
    `Alinhamento: <pedido> atende <item do roadmap | regra | defeito> em <fonte>. Pronto quando: <critério observável>.`
-   Sem item, regra ou defeito que sustente o pedido: não implemente. Anote em "fora do escopo" e pergunte só o que decide.
+   Sem item, regra ou defeito que sustente o pedido: não implemente. Anote em "fora do escopo" e pergunte só o que decide. Regra e decisão entram pelo identificador (DT-12, ADR-009, R-03); o que não tem identificador ganha um ao ser registrado.
 6. Se faltar propósito, regra ou etapa para escolher a direção: faça a menor pergunta que destrava uma decisão real e siga com o que não depende dela. Proposta sua é proposta até ser aceita. Não invente público, prazo, prioridade nem funcionalidade.
 
 ## 2. Executar: só o que a linha cobre
@@ -26,6 +26,9 @@ Meta: nenhum código sem item do roadmap, regra do projeto ou defeito comprovado
 - Reaproveite os padrões do projeto. Escolha rotineira de implementação: decida sozinho. Ambiguidade que muda produto, público, comportamento ou escopo: pergunte só isso e continue o resto.
 - Defeito entra sem estar no roadmap quando quebra o fluxo da etapa atual ou uma regra do projeto. Antes de corrigir, registre esperado (com fonte) e observado (com evidência). Hipótese autoriza investigar, não implementar. Escolha a menor investigação que separe as hipóteses e corrija a causa sustentada por evidência.
 - Separe sempre fato verificado, hipótese e decisão pendente. Tentativa descartada vai para o checkpoint com o motivo, para não repetir.
+- Precisou assumir algo para seguir: escreva `Suposição: <o quê> · confirma: <quem ou fonte>` no chat e no checkpoint. Nada com suposição aberta conta como verificado; confirmada ou refutada, ela sai do checkpoint.
+- Item do roadmap sem critério observável não entra em execução: escreva o critério com o usuário e registre no roadmap antes de começar.
+- Trabalho visual (tela nova, identidade, componente) só começa com uma referência aceita pelo usuário: qual aplicativo, tela ou imagem seguir e o que copiar dela. Sem referência, peça-a antes de desenhar; direção inventada custa rodadas.
 - Mudou a abordagem ou surgiu trabalho extra: refaça a linha de alinhamento. Mudança explícita do usuário substitui a direção anterior: registre o que substitui, atualize a fonte afetada e não peça de novo autorização já dada.
 
 ## 3. Revisar ou adequar um aplicativo existente

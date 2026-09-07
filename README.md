@@ -12,7 +12,7 @@ A [apresentação em PDF](docs/auxcode-apresentacao.pdf) explica cada mecanismo 
 
 ## Instalação
 
-Clone o repositório direto na pasta de skills. Só `SKILL.md` e `checkpoint.md` entram em uso; o resto é documentação e não custa contexto.
+Clone o repositório direto na pasta de skills. Só `SKILL.md` entra em uso a cada invocação; `checkpoint.md` e `projeto.md` são lidos sob demanda; o resto é documentação e não custa contexto.
 
 | Uso | Comando |
 | --- | --- |
@@ -59,6 +59,8 @@ Um ciclo de cinco passos por pedido: **retomar** lendo o mínimo e conferindo o 
 
 Três regras contra erros que passam despercebidos: teste criado junto com a correção tem que falhar sem ela; afirmação de ausência exige contagem completa, não saída cortada; inspecionar não é executar.
 
+Quatro regras contra a suposição: o que o modelo precisar assumir para seguir vai como `Suposição:` no chat e no checkpoint, e nada com suposição aberta conta como verificado; regras e decisões são citadas pelo identificador; item do roadmap sem critério observável não entra em execução; trabalho visual só começa com referência aceita. O briefing mínimo do projeto, com glossário, regras com identificador e roadmap com critério, está em [projeto.md](projeto.md).
+
 ## Sessões longas e compactação
 
 O conteúdo da skill entra na conversa como uma mensagem e fica lá nos turnos seguintes. Na compactação automática, o Claude Code reanexa a invocação mais recente de cada skill, guardando os primeiros 5.000 tokens dela, com orçamento combinado de 25.000 tokens entre skills. Esta skill tem cerca de 2 mil tokens e sobrevive inteira. O que não sobrevive à compactação é o raciocínio da sessão; por isso o estado fica no checkpoint em disco. Reinvocar a skill numa sessão nova é o gesto de retomada. [Ciclo de vida da skill](https://code.claude.com/docs/en/skills#skill-content-lifecycle).
@@ -75,7 +77,7 @@ arquivo e confira-o contra o estado real antes de continuar.
 
 A skill orienta decisões e registros. Não é um monitor automático, não mede tokens nem percentuais de contexto e não garante ausência de erro ou cumprimento de prazo. A economia vem de ler menos na retomada, não repetir tentativas descartadas e não escrever código fora do escopo.
 
-Versão 0.3.1, setembro de 2026. Estrutura validada e duas primeiras sessões de uso real feitas, retomada e revisão diagnóstica; os ajustes desta versão vieram delas. Detalhes em [docs/VALIDACAO.md](docs/VALIDACAO.md) e no [histórico de versões](CHANGELOG.md).
+Versão 0.4.0, setembro de 2026. Estrutura validada. Duas sessões de uso real na 0.3.x, retomada e revisão diagnóstica, geraram os ajustes da 0.3.1; o briefing e as regras contra suposição da 0.4.0 ainda não têm uso real. Detalhes em [docs/VALIDACAO.md](docs/VALIDACAO.md) e no [histórico de versões](CHANGELOG.md).
 
 ## Relatar o que observou
 

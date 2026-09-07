@@ -1,5 +1,16 @@
 # Histórico de versões
 
+## 0.4.0 — 6 de setembro de 2026
+
+Corpo de informação do projeto, para tirar a suposição do caminho:
+
+- Novo arquivo de apoio `projeto.md`: briefing mínimo (problema e resultado, público, jornadas, fora do escopo, restrições, referências visuais), glossário, regras e decisões com identificador, roadmap com critério observável por item e tabela de suposições abertas. Lido só ao começar um projeto ou ao cobrir lacuna.
+- Suposição explícita: o que o modelo precisar assumir para seguir vai como `Suposição:` no chat e no checkpoint; nada com suposição aberta conta como verificado.
+- Regras e decisões entram na linha de alinhamento pelo identificador; o que não tem identificador ganha um ao ser registrado.
+- Item do roadmap sem critério observável não entra em execução; o critério é escrito com o usuário antes.
+- Trabalho visual só começa com referência aceita pelo usuário.
+- Checkpoint ganha o campo "Suposições abertas".
+
 ## 0.3.1 — 6 de setembro de 2026
 
 Quatro ajustes vindos das duas primeiras sessões de uso real (retomada e revisão diagnóstica num projeto com STATUS e roadmap):
