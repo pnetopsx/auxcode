@@ -1,5 +1,10 @@
 # Histórico de versões
 
+## 0.4.1 — 6 de setembro de 2026
+
+- A skill passa a carregar só por comando: `disable-model-invocation: true` no frontmatter. O Claude não a aciona sozinho e a descrição dela deixa de ocupar contexto quando não é chamada. Motivo: em uso real ela carregava ao abrir qualquer projeto. Quem preferir seleção automática remove a linha na cópia instalada.
+- README e apresentação ajustados: o gesto de início de sessão é `/auxcode retomar`; o `CLAUDE.md` registra só onde fica o arquivo de estado.
+
 ## 0.4.0 — 6 de setembro de 2026
 
 Corpo de informação do projeto, para tirar a suposição do caminho:

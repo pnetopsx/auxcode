@@ -1,5 +1,17 @@
 # Validação — auxcode
 
+## 0.4.1 — 6 de setembro de 2026
+
+Mudança de invocação: `disable-model-invocation: true`. Observação de uso real que a motivou: a skill carregava sozinha ao abrir qualquer projeto, pelo gatilho amplo de `when_to_use`. Pela documentação do Claude Code (consultada em 6 de setembro de 2026), com esse campo a descrição não entra no contexto e só o usuário invoca, por `/auxcode`. O campo consta no binário 2.1.263 instalado (busca textual). `when_to_use` foi mantido para quem remover a linha.
+
+- Frontmatter reanalisado com `YAML.safe_load`: cinco chaves, `disable-model-invocation` lido como booleano verdadeiro. Corpo com 1136 palavras. Sem outra mudança na skill.
+
+```text
+1f16713e4858ff7449eff10d0b50e2cb9e1877fafdaaba5e3458ae9d88ef3f03  SKILL.md
+d84b254eaee9cff1a4f4182f75428db3f3ef173f14e0b8a3800edd42ae62941d  checkpoint.md
+b1e61f67b8ea77c73649dc33d62782a02ade958a458b4b133926781be18f7164  projeto.md
+```
+
 ## 0.4.0 — 6 de setembro de 2026
 
 Acréscimo de corpo de informação do projeto (`projeto.md`) e de quatro regras contra suposição. **Sem nova evidência de uso real nesta versão.** As regras vêm de lições registradas em projetos do autor (trabalho visual sem referência custou rodadas em duas ocasiões; regras com identificador foram o que tornou a revisão da 0.3.x citável), não de ensaio desta skill.

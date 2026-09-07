@@ -1,5 +1,6 @@
 ---
 name: auxcode
+disable-model-invocation: true
 description: Use ao iniciar um aplicativo do zero, retomar um em andamento, revisar ou adequar o código às regras do projeto, ou corrigir defeitos nele. Mantém cada mudança rastreável a um item do roadmap, a uma regra do projeto ou a um defeito comprovado, exige evidência para dar algo por pronto e guarda um checkpoint curto para retomar sem reler a documentação. Projeto sem roadmap ou regras escritas ganha o mínimo deles a partir do que já existe.
 when_to_use: Gatilhos típicos são "retoma", "continua de onde parou", "o que falta para fechar a etapa", "revise este app", "adeque às regras do projeto", "implemente X" ou "corrija X" num aplicativo. Não use para dúvidas conceituais, tarefas fora de um aplicativo ou quando o usuário pediu só uma resposta rápida.
 argument-hint: <pedido, "retomar" ou "revisar">

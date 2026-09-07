@@ -23,7 +23,7 @@ Para atualizar, `git pull` na mesma pasta. Se a pasta de skills não existia qua
 
 ## Uso
 
-Abra o Claude Code na raiz do aplicativo. Invoque `/auxcode <pedido>` ou deixe a seleção automática agir: frases como "retoma", "continua de onde parou", "o que falta para fechar a etapa" ou "revise este app" acionam a skill sem comando.
+Abra o Claude Code na raiz do aplicativo e invoque `/auxcode <pedido>`. A skill só carrega por comando: o `SKILL.md` traz `disable-model-invocation: true`, então o Claude não a aciona sozinho e a descrição dela não ocupa contexto enquanto você não a chama. Se preferir seleção automática por frases como "retoma" ou "revise este app", remova essa linha do `SKILL.md` instalado; um `git pull` futuro pode pedir para você manter a remoção.
 
 ```text
 /auxcode Quero começar um aplicativo de agenda. Defina comigo propósito,
@@ -65,19 +65,13 @@ Quatro regras contra a suposição: o que o modelo precisar assumir para seguir 
 
 O conteúdo da skill entra na conversa como uma mensagem e fica lá nos turnos seguintes. Na compactação automática, o Claude Code reanexa a invocação mais recente de cada skill, guardando os primeiros 5.000 tokens dela, com orçamento combinado de 25.000 tokens entre skills. Esta skill tem cerca de 2 mil tokens e sobrevive inteira. O que não sobrevive à compactação é o raciocínio da sessão; por isso o estado fica no checkpoint em disco. Reinvocar a skill numa sessão nova é o gesto de retomada. [Ciclo de vida da skill](https://code.claude.com/docs/en/skills#skill-content-lifecycle).
 
-Opcionalmente, no `CLAUDE.md` do aplicativo:
-
-```text
-Neste aplicativo, aplique a skill auxcode. Estado de trabalho (mapa de
-fontes e checkpoint): [caminho real]. Na retomada, leia primeiro esse
-arquivo e confira-o contra o estado real antes de continuar.
-```
+Como a skill não carrega sozinha, o gesto de início de sessão num aplicativo é digitar `/auxcode retomar` antes de qualquer pedido. Uma nota no `CLAUDE.md` do aplicativo não substitui isso: o Claude não pode invocar a skill por conta própria. O que vale registrar no `CLAUDE.md` é onde fica o arquivo de estado (mapa de fontes e checkpoint), para que a retomada o encontre de primeira.
 
 ## Limites e estado atual
 
 A skill orienta decisões e registros. Não é um monitor automático, não mede tokens nem percentuais de contexto e não garante ausência de erro ou cumprimento de prazo. A economia vem de ler menos na retomada, não repetir tentativas descartadas e não escrever código fora do escopo.
 
-Versão 0.4.0, setembro de 2026. Estrutura validada. Duas sessões de uso real na 0.3.x, retomada e revisão diagnóstica, geraram os ajustes da 0.3.1; o briefing e as regras contra suposição da 0.4.0 ainda não têm uso real. Detalhes em [docs/VALIDACAO.md](docs/VALIDACAO.md) e no [histórico de versões](CHANGELOG.md).
+Versão 0.4.1, setembro de 2026. Estrutura validada. Duas sessões de uso real na 0.3.x, retomada e revisão diagnóstica, geraram os ajustes da 0.3.1; o briefing e as regras contra suposição da 0.4.0 ainda não têm uso real. Detalhes em [docs/VALIDACAO.md](docs/VALIDACAO.md) e no [histórico de versões](CHANGELOG.md).
 
 ## Relatar o que observou
 
