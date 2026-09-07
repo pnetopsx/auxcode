@@ -713,7 +713,7 @@ $ grep -c ERRO app.log
       <h2>Sessões longas</h2>
       <p>Quando a conversa é compactada, o Claude Code reanexa a invocação mais recente de cada skill, até 5.000 tokens por skill e 25.000 no total. Esta skill cabe inteira. O que não sobrevive à compactação é o raciocínio da sessão; por isso o estado fica no checkpoint em disco, não na memória do modelo.</p>
       <h2>O que ela não toca</h2>
-      <p>A skill não edita <code>CLAUDE.md</code>, configurações nem hooks para se instalar. Quem decide integrá-la ao <code>CLAUDE.md</code> de um projeto é você, com uma referência de três linhas.</p>
+      <p>A skill não edita <code>CLAUDE.md</code>, configurações nem hooks para se instalar. No <code>CLAUDE.md</code> de um projeto vale registrar só onde fica o arquivo de estado; ela é chamada por você, com <code>/auxcode</code>.</p>
     </div>
   </div>
   <div class="foot"><span>auxcode · skill para o Claude Code · 0.4.1</span><span>11</span></div>
