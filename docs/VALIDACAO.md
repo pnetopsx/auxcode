@@ -1,5 +1,21 @@
 # Validação — auxcode
 
+## 0.3.1 — 6 de setembro de 2026
+
+Primeiras evidências de uso real, em duas sessões novas do Claude Code sobre um projeto privado com `docs/STATUS.md` e roadmap, observadas pelo autor e avaliadas pelo agente que escreveu a skill:
+
+- **Retomada** (`/auxcode` sem argumento). Leu um arquivo, uma listagem e um comando antes de falar; conferiu git, tipos e testes em vez de aceitar o "PASSED" do STATUS; do plano, leu só as seções apontadas; não escreveu código porque o plano esperava aceite do proprietário. Não escreveu a linha de alinhamento (não houve código), não regravou o checkpoint (nada mudou) e não disse em que versão do Node os testes rodaram, num projeto que exige versão diferente da instalada no sistema.
+- **Revisão diagnóstica** (`/auxcode revisar`; alvo escolhido pelo usuário entre opções da sessão: uma entrega inteira). Perguntou o alvo antes de começar; conferiu o STATUS; classificou cada achado em viola regra, defeito ou decisão do usuário, com arquivo e linha, medição e reprodução; verificou de forma independente os achados dos subagentes; fez teste de mutação numa regra sem cobertura; não alterou nada. Custo alto pelo alvo amplo, que a própria sessão recomendou. O relatório ficou só na pasta de trabalho da sessão.
+
+Cada ajuste da 0.3.1 responde a uma dessas observações; ver o histórico de versões. Duas sessões não são amostra, não houve medição de tokens, e os limites registrados na 0.2.0 continuam.
+
+- Frontmatter reanalisado com `YAML.safe_load` (Ruby/Psych) após as edições: `name` igual a `auxcode`, descrição com 439 caracteres, `when_to_use` com 301, combinado de 740. Corpo com 984 palavras. Apresentação regenerada com a versão e duas frases novas nas páginas 9 e 12.
+
+```text
+cd97d60e5796ac19826decbfd6d8c85092118d2330313823c7e5927815cbb453  SKILL.md
+2d1d7b4d6e80375ffd21aa9d917e19076e5f453b1ef8e296dff5f9d80bfedc3d  checkpoint.md
+```
+
 ## 0.3.0 — 6 de setembro de 2026
 
 Mudança desta versão: o nome do comando e do repositório passa de `foco-no-roadmap` para `auxcode`; o conteúdo da skill é o da 0.2.0. Não houve avaliação de comportamento; ver "Ainda requer uso real" na seção da 0.2.0, que continua valendo.

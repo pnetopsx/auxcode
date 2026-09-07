@@ -75,7 +75,7 @@ arquivo e confira-o contra o estado real antes de continuar.
 
 A skill orienta decisões e registros. Não é um monitor automático, não mede tokens nem percentuais de contexto e não garante ausência de erro ou cumprimento de prazo. A economia vem de ler menos na retomada, não repetir tentativas descartadas e não escrever código fora do escopo.
 
-Versão 0.3.0, setembro de 2026. Estrutura validada; o ensaio em projetos reais está em andamento. Detalhes em [docs/VALIDACAO.md](docs/VALIDACAO.md) e no [histórico de versões](CHANGELOG.md).
+Versão 0.3.1, setembro de 2026. Estrutura validada e duas primeiras sessões de uso real feitas, retomada e revisão diagnóstica; os ajustes desta versão vieram delas. Detalhes em [docs/VALIDACAO.md](docs/VALIDACAO.md) e no [histórico de versões](CHANGELOG.md).
 
 ## Relatar o que observou
 

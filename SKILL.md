@@ -30,15 +30,17 @@ Meta: nenhum código sem item do roadmap, regra do projeto ou defeito comprovado
 
 ## 3. Revisar ou adequar um aplicativo existente
 
+- Revisão sem alvo definido: proponha o menor recorte útil como padrão e deixe o usuário ampliar. Revisar tudo custa caro e raramente é o pedido.
 - Base de comparação, nesta ordem: regras e decisões do projeto; diretrizes do Guia de aplicativos que o projeto adotou; padrões que o próprio código já pratica. Norma genérica ou preferência sua não é regra do projeto.
 - Percorra só a área pedida. Cada achado traz evidência (arquivo e trecho, teste ou reprodução) e uma classe. **Viola regra do projeto**: corrija. **Defeito**, com esperado e observado: corrija se quebra a etapa atual ou uma regra, senão backlog. **Risco ou recomendação**: relate, proponha como regra ou item de roadmap e, sem aceite, zero código. Regra praticada mas não escrita é proposta de regra, não desvio.
-- Priorize por objetivo, etapa e dependência. Pedido de adequação: corrija e valide cada item; não termine só com recomendações. Pedido só de diagnóstico: entregue achados com evidência e não altere a implementação.
+- Priorize por objetivo, etapa e dependência. Pedido de adequação: corrija e valide cada item; não termine só com recomendações. Pedido só de diagnóstico: não altere a implementação, mas grave o relatório de achados no local de evidências ou de estado do projeto, salvo pedido explícito de não gravar nada; relatório só no chat some com a sessão.
 - Não amplie a inspeção além da área pedida; o que viu fora dela vira uma linha no backlog.
 
 ## 4. Pronto: só com evidência
 
 - Valide pelo critério da linha, no fluxo afetado. Compilar não prova; inspecionar não é executar. Interface: verifique funcional e visualmente quando houver ferramenta.
 - Teste criado junto com a correção: prove que falha sem ela antes de confiar no verde.
+- Evidência vale no ambiente que o projeto exige (versão de runtime, variáveis, flags). Se rodou em outro, diga qual e não conte como verificado.
 - Afirmação de ausência ("não há X") exige contagem completa, não saída cortada. Agregue saídas com contagem ou filtro; não despeje logs no contexto.
 - Revise o diff contra o pedido e remova acréscimos seus sem justificativa. Preserve trabalho preexistente do usuário.
 - Relate em três estados: feito, verificado, publicado. Diga o que ficou sem verificar e por quê.
@@ -46,4 +48,4 @@ Meta: nenhum código sem item do roadmap, regra do projeto ou defeito comprovado
 
 ## 5. Marco ou encerramento: um checkpoint, sempre atual
 
-Substitua o checkpoint anterior; não crie diário. Campos e formato em [checkpoint.md](checkpoint.md). Decisão durável vai para o documento de decisões do projeto; o checkpoint só a referencia. Sem logs, código ou segredos. O próximo passo é o próximo item da etapa, salvo bloqueio registrado. Se não puder gravar arquivos, entregue o registro ao usuário e diga que a retomada depende dele.
+Substitua o checkpoint anterior; não crie diário. Se nada mudou desde o último, não o regrave e diga isso no relato. Campos e formato em [checkpoint.md](checkpoint.md). Decisão durável vai para o documento de decisões do projeto; o checkpoint só a referencia. Sem logs, código ou segredos. O próximo passo é o próximo item da etapa, salvo bloqueio registrado. Se não puder gravar arquivos, entregue o registro ao usuário e diga que a retomada depende dele.
