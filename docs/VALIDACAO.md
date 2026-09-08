@@ -1,5 +1,61 @@
 # Validação — auxcode
 
+## 0.5.0 — 7 de setembro de 2026
+
+**Origem.** Uma cópia do `github/spec-kit` (commit `4a7341a`, main, 4 de setembro de 2026) foi clonada numa pasta temporária e lida. **Nada do repositório foi executado**: nem a CLI, nem os testes, nem os scripts. A mecânica de 18 unidades do spec-kit foi extraída em paralelo, comparada com os três arquivos da skill, fundida sem repetições e submetida a três verificadores independentes por candidata: fidelidade à fonte (o spec-kit realmente prescreve isto, no trecho citado?), encaixe (contradiz alguma regra do auxcode, é procedimento com saída conferível, cabe no orçamento de contexto?) e valor (muda o comportamento numa sessão real, contra uma lista de falhas já observadas?). Um crítico de completude apontou 16 mecanismos não cobertos e abriu uma rodada extra.
+
+**Resultado.** 22 candidatas refutadas por inteiro e 50 aceitas em algum grau, fundidas em 29 mudanças. Onde uma lente refutou, o texto entrou com o corte que ela exigiu, registrado na coluna de votos. Também foram medidos 73 mecanismos que o auxcode já tinha, 32 em que ele é mais preciso que o spec-kit, 24 conflitos de filosofia e 21 mecanismos recusados por desenho (TDD obrigatório, especificação como fonte da verdade, diretório por funcionalidade, marcadores de paralelismo, cadência de commit, entre outros).
+
+**Procedência.** As 81 citações de origem apontam para texto, não para código: 34 para `templates/commands/*.md`, 23 para comandos das extensões, 11 para modelos de documento, 5 para agentes da CI do próprio spec-kit, 7 para o ensaio e os guias, e 1 para um script de shell. **Nenhuma para código Python.**
+
+**Segurança do material lido.** Uma auditoria separada, sobre nove superfícies do spec-kit, não encontrou código malicioso: a instalação não executa nada do repositório, importar o pacote não tem efeito colateral, e `specify init` não faz chamada de rede nem cria subprocesso. Três achados reais sobrevivem, todos dependentes de instalar extensão de terceiro ou de rodar a ferramenta dentro de repositório alheio. Nada disso afeta esta skill, que só reutilizou texto.
+
+**Origem e votação de cada mudança:**
+
+| Entrada | Arquivo | Votos | Fonte no spec-kit |
+| --- | --- | --- | --- |
+| `C08+X43` | SKILL.md | C08 3/3 · X43 3/3 | docs/guides/evolving-specs.md:55-56; extensions/git/commands/speckit.git.validate.md:19-23,33-41; templates/commands/analyze.md:54,162-172; extensions/bug/commands/speckit.bug.fix.md:21-32 |
+| `C37` | SKILL.md | 2/3 (value refutou: conveniência, não prevenção — adotado só o resíduo de 8 palavras) | extensions/agent-context/commands/speckit.agent-context.update.md:18; extensions/agent-context/README.md:7,13 |
+| `C20` | SKILL.md | 2/3 (value refutou: escrituração barata — adotado só a releitura do índice na hora) | templates/commands/converge.md:203-206; templates/commands/taskstoissues.md:67,69-70; scripts/bash/create-new-feature.sh:112-133,299,301 |
+| `C10+X15` | SKILL.md | C10 2/3 (value refutou o teto de 3 e o excedente-vira-Suposição, cortados) · X15 2/3 (fit refutou "pare e espere", cortado) | templates/commands/specify.md:204-230; templates/commands/clarify.md:131-133,141-147,170-173; templates/commands/implement.md:79-84 |
+| `C32` | SKILL.md | 2/3 (value refutou o motivo de recusa; adotado o inverso, "o que falta") | extensions/assess/commands/speckit.assess.decide.md:7,40-41,96; extensions/assess/README.md:22 |
+| `C05` | SKILL.md | 3/3 | templates/commands/taskstoissues.md:58-65,73; extensions/git/commands/speckit.git.remote.md:19-45 |
+| `C12+X18+X48` | SKILL.md | C12 2/3 · X18 2/3 · X48 2/3 (value refutou os três: risco não observado — adotado só o resíduo de proveniência) | .github/workflows/bug-fix.md:111-124; extensions/bug/commands/speckit.bug.assess.md:40-45; extensions/assess/commands/speckit.assess.research.md:30 |
+| `X26+X33+X41+X16` | SKILL.md | X26 2/2 · X33 2/3 · X41 2/3 · X16 2/3 (value refutou os três últimos como redundantes; fundidos numa cláusula só) | .github/workflows/bug-fix.md:165-167,176-181,194-196,301; extensions/bug/commands/speckit.bug.fix.md:51,110; templates/commands/implement.md:163-168 |
+| `C16+C17+X110` | SKILL.md | C16 2/3 · C17 2/3 · X110 2/3 (value refutou a varredura de 5 classes e o portão de interface; adotado o caso de erro e o de gravação de dados) | templates/commands/checklist.md:209,218-222; templates/commands/plan.md:146-150 |
+| `C11+C22` | SKILL.md | C11 2/3 · C22 2/3 (value refutou o roteamento e a busca por ID; adotado o prazo e o resíduo reaberto) | templates/commands/clarify.md:182-196; spec-driven.md:395-398; templates/constitution-template.md:44 |
+| `X11+C27+X21+X45` | SKILL.md | X11 2/2 · C27 2/2 · X21 2/3 · X45 2/3 (value refutou a proibição de sobrescrever; adotado só "não apague o anterior") | templates/commands/checklist.md:28,150,158-167,224-226,242-248; templates/commands/converge.md:77-78,159-160,219-220; templates/commands/analyze.md:168-172,243; extensions/bug/commands/speckit.bug.test.md:38,116 |
+| `C01+C18+X27` | SKILL.md | C01 3/3 · X27 2/3 · C18 2/3 (value refutou X27/C18; adotada só a suíte já existente do fluxo tocado) | templates/commands/plan.md:152-157; templates/commands/implement.md:171-174; extensions/bug/commands/speckit.bug.test.md:46-52,54-57,74; docs/guides/existing-projects.md:56-62 |
+| `C02+X24+X44` | SKILL.md | C02 2/3 (fit refutou o vocabulário; corrigido) · X24 3/3 · X44 2/3 (value refutou a obrigação de teste; fundida na prova do vermelho) | templates/tasks-template.md:85,182,249; spec-driven.md:312-316; extensions/bug/commands/speckit.bug.test.md:61-64,117; extensions/bug/commands/speckit.bug.fix.md:49 |
+| `X54+C06+X23+X47` | SKILL.md | X54 3/3 · C06 2/3 · X23 2/3 · X47 2/3 (value refutou os três de consentimento; adotada meia linha, sem "serviço externo") | .github/workflows/feature-assess.md:143-148,271-275; extensions/bug/commands/speckit.bug.test.md:56-57; .github/workflows/bug-fix.md:185-194 |
+| `C04` | SKILL.md | 2/3 (value refutou o escopo aberto; limitado às regras que a linha cita ou que tocam os arquivos alterados) | templates/commands/analyze.md:58,60,249; templates/plan-template.md:41 |
+| `C13+X49` | SKILL.md | C13 2/3 · X49 2/3 (value refutou o portão de dependência e a proibição de merge; adotado só o relato) | templates/commands/implement.md:149-154; .github/workflows/bug-fix.md:221-222,269,294-297 |
+| `C14` | SKILL.md | 3/3 | templates/commands/converge.md:60-63,68-69,137-139,145-158 |
+| `C01+C31+C38` | checkpoint.md | C01 3/3 · C31 2/3 · C38 2/3 (value refutou C31/C38; adotado apontar em vez de copiar a stack) | templates/plan-template.md:21-37; templates/commands/plan.md:163; extensions/agent-context/commands/speckit.agent-context.update.md:20 |
+| `C09+C25+X53` | checkpoint.md | C09 3/3 · C25 2/2 · X53 2/3 (value refutou o gatilho amplo; preso a "mudou depois de você ler") | extensions/git/commands/speckit.git.validate.md:19-23; extensions/git/commands/speckit.git.commit.md:18,61; docs/guides/evolving-specs.md:48-49; extensions/agent-context/README.md:5; extensions/assess/commands/speckit.assess.intake.md:46 |
+| `C19-checkpoint` | checkpoint.md | 2/3 (value refutou a parada para aceite e o bullet no SKILL.md; adotada só a extensão do campo) | templates/commands/plan.md:126,131-133; templates/plan-template.md:106-110; spec-driven.md:224,378 |
+| `C21b+X24b+C02b` | checkpoint.md | herda C21 2/3, X24 3/3, C02 2/3 (correção de exemplo, sem regra nova) | extensions/bug/commands/speckit.bug.test.md:61-64,117; templates/commands/converge.md:137-139,219-220; templates/commands/checklist.md:209 |
+| `C24` | checkpoint.md | 2/3 (value refutou a varredura antes de salvar; adotada só a marcação no próprio modelo) | templates/checklist-template.md:13-21; templates/tasks-template.md:31,44; templates/plan-template.md:61; templates/commands/analyze.md:127 |
+| `C23+C33` | projeto.md | C23 2/3 · C33 2/3 (value refutou a conferência por classes e a linha `Contra:`; adotada a fonte por campo) | templates/commands/specify.md:146-197; spec-driven.md:186-187,190; extensions/assess/commands/speckit.assess.research.md:66,93 |
+| `C26` | projeto.md | 2/3 (value refutou o gatilho no fechamento de etapa e a dicotomia; adotado o terceiro estado "etapa futura") | templates/commands/analyze.md:142-144,156 |
+| `C19-projeto` | projeto.md | 2/3 (value refutou a versão com parada para aceite; adotada só a coluna) | templates/plan-template.md:106-110; templates/commands/plan.md:131-133 |
+| `C21` | projeto.md | 2/3 (value refutou a governança de regras; adotada só a coluna de ID no roadmap) | templates/commands/converge.md:73-78,219-220; templates/commands/constitution.md:100-104; templates/commands/analyze.md:110 |
+| `C16+X110-projeto` | projeto.md | C16 2/3 · X110 2/3 (value refutou a varredura obrigatória no SKILL.md; movida para leitura sob demanda) | templates/commands/checklist.md:209,218-222 |
+| `X13` | projeto.md | 2/3 (value refutou o parágrafo e a conferência antes de salvar; adotada só a marcação) | templates/checklist-template.md:13-21; templates/tasks-template.md:44 |
+| `X11+C27+X21-detalhe` | new-file:revisao.md | X11 2/2 · C27 2/2 · X21 2/3 · X45 2/3 | templates/commands/checklist.md:28,150,158-167,224-226,242-248; templates/commands/converge.md:159-160,219-220; templates/commands/analyze.md:168-172,243; extensions/bug/commands/speckit.bug.fix.md:37,112 |
+
+
+**Conferência estrutural.** Frontmatter reanalisado com `YAML.safe_load` (Ruby/Psych): cinco chaves, `disable-model-invocation` lido como booleano verdadeiro, descrição com 439 caracteres e `when_to_use` com 301, combinado de 740 (teto de 1.536 do listing). Corpo com 1.880 palavras e cerca de 3,5 mil tokens, dentro do teto de 5.000 por skill na compactação. Os dezesseis links relativos de `SKILL.md`, `README.md` e `revisao.md` resolvem. Nenhum script ou dependência de execução foi acrescentado.
+
+```text
+c6b9066968720c371606292ec24bf5a7f20d69edca8792a62242afe8cecccccf  SKILL.md
+55c291a6e04198e8a59e2708ec85c6fb51e79b768a7b0cc400dc1afcc208428d  checkpoint.md
+1f0a30935fd17e33068c81eaddea1563501df9baf8795936a9192212efe3397f  projeto.md
+34f17add8a7ccc836109c6d9a1f1a70baafdc6f5b0ddbf5131b68a523d38f1f0  revisao.md
+```
+
+**O que esta versão NÃO tem.** Nenhuma das 29 entradas foi exercitada numa sessão real. Elas vêm de leitura e verificação adversarial, não de uso. As duas sessões de uso real registradas na seção da 0.3.1 e a observação que motivou a 0.4.1 valem para o texto anterior. Depois da 0.4.1, cinco sessões reais no projeto Leilões exercitaram aquele texto (retomada; pedido sem sustentação mandado ao backlog; correção com o teste falhando antes e o portão no runtime exigido; pergunta em vez de chute; recusa de trabalho visual sem referência) e nenhuma delas foi registrada aqui na época; os três ajustes que elas sugeriram continuam não aplicados. O primeiro uso recomendado é uma retomada e uma revisão diagnóstica num projeto pequeno, observando especificamente: se a conferência da retomada aparece no chat, se o portão de verificação é procurado no mapa de fontes, e se a resposta a "o que falta para fechar a etapa" percorre as cláusulas em vez de repetir a coluna Estado.
+
 ## 0.4.1 — 6 de setembro de 2026
 
 Mudança de invocação: `disable-model-invocation: true`. Observação de uso real que a motivou: a skill carregava sozinha ao abrir qualquer projeto, pelo gatilho amplo de `when_to_use`. Pela documentação do Claude Code (consultada em 6 de setembro de 2026), com esse campo a descrição não entra no contexto e só o usuário invoca, por `/auxcode`. O campo consta no binário 2.1.263 instalado (busca textual). `when_to_use` foi mantido para quem remover a linha.
