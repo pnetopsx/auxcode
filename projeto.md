@@ -4,6 +4,8 @@ Para aplicativo do zero ou projeto em andamento sem propósito, regras ou roadma
 
 O objetivo é eliminar suposição: cada campo abaixo é uma pergunta que, sem resposta escrita, o modelo teria de chutar.
 
+Briefing derivado de projeto em andamento: cada campo e cada regra levam a fonte que os sustenta (arquivo:linha, commit, decisão). Campo sem fonte não vira palpite marcado como proposta; vira a pergunta, escrita no lugar do valor, ou linha em Suposições abertas.
+
 ## Briefing
 
 ```markdown
@@ -18,6 +20,8 @@ O objetivo é eliminar suposição: cada campo abaixo é uma pergunta que, sem r
 
 Trabalho visual sem referência aceita não começa. Anote aqui a referência antes de desenhar.
 
+Ao apresentar o briefing para aceite, diga quais jornadas ainda não têm item no roadmap e pergunte, para cada uma: agora, etapa futura ou fora do escopo? Jornada sem resposta fica em Suposições abertas, não vira item nem exclusão por conta própria.
+
 ## Glossário
 
 Um significado por termo. O código usa o mesmo nome do glossário.
@@ -26,7 +30,7 @@ Um significado por termo. O código usa o mesmo nome do glossário.
 ## Glossário
 | Termo | Significado único | Nome no código |
 | --- | --- | --- |
-| Teto | Maior lance que ainda respeita a meta de lucro | `teto` |
+| ex.: Teto | Maior lance que ainda respeita a meta de lucro | `teto` |
 ```
 
 ## Regras e decisões
@@ -35,25 +39,29 @@ Toda regra e decisão tem identificador; a linha de alinhamento cita o identific
 
 ```markdown
 ## Regras e decisões
-| ID | Regra ou decisão | Fonte e data | Substituída por |
-| --- | --- | --- | --- |
-| R-01 | Total nunca negativo | reunião 2026-09-02 | |
-| D-01 | Dinheiro em inteiros (centavos), nunca ponto flutuante | ADR-003 | |
+| ID | Regra ou decisão | Motivo · alternativa descartada | Fonte e data | Substituída por |
+| --- | --- | --- | --- | --- |
+| ex.: R-01 | Total nunca negativo | pedido do proprietário · nenhuma alternativa cogitada | reunião 2026-09-02 | |
+| ex.: D-01 | Dinheiro em inteiros (centavos), nunca ponto flutuante | float diverge do formatador · Decimal descartado por peso no bundle | ADR-003 | |
 ```
 
 ## Roadmap
 
 Item sem "pronto quando" observável não entra em execução: o critério é escrito com o usuário antes. Um item tem uma entrega verificável, não um tema.
 
+Classes a percorrer ao escrever o "pronto quando", quando o pedido as toca: caminho principal · fluxo alternativo · estado vazio · falha prevista (entrada inválida, item inexistente) · limite e volume · integração fora do ar · recuperação, quando a mudança grava dados ou muda esquema. Classe que não vale para o item vira exclusão escrita em "fora do escopo", não fica em branco. Pergunte só a classe que decide a direção; as demais seguem como suposição registrada.
+
 ```markdown
 ## Roadmap
-| Etapa | Item | Pronto quando | Depende de | Estado |
-| --- | --- | --- | --- | --- |
-| 1 | Cadastro de lote | lote salvo aparece na lista após recarregar; campos inválidos são apontados | | feito · verificado · publicado |
-| 2 | Paginação da lista | 1.000 lotes em páginas de 50; teste de paginação passa | Etapa 1 | |
+| ID | Etapa | Item | Pronto quando | Depende de | Estado |
+| --- | --- | --- | --- | --- | --- |
+| ex.: E1-01 | 1 | Cadastro de lote | lote salvo aparece na lista após recarregar; campos inválidos são apontados | | feito · verificado · publicado |
+| ex.: E2-01 | 2 | Paginação da lista | 1.000 lotes em páginas de 50; teste de paginação passa | E1-01 | |
 ```
 
 Estado usa os três níveis: feito, verificado, publicado. Item marcado como concluído tem a evidência ao lado ou no arquivo de estado.
+
+O ID do item não muda nem é reaproveitado; reordenar e repriorizar é livre, porque a citação é pelo ID, não pela posição. Item cancelado fica na tabela com Estado `cancelado · substituído por <ID>`; item novo entra com ID novo.
 
 ## Suposições abertas
 
@@ -63,5 +71,5 @@ O que o modelo precisou assumir para seguir e ainda não foi confirmado. Nada co
 ## Suposições abertas
 | Suposição | Quem confirma | Estado |
 | --- | --- | --- |
-| Comissão do leiloeiro é sempre 5% | proprietário | aberta |
+| ex.: Comissão do leiloeiro é sempre 5% | proprietário | aberta |
 ```
