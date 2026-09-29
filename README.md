@@ -23,7 +23,7 @@ Para atualizar, `git pull` na mesma pasta. Se a pasta de skills não existia qua
 
 ## Uso
 
-Abra o Claude Code na raiz do aplicativo e invoque `/auxcode <pedido>`. A skill só carrega por comando: o `SKILL.md` traz `disable-model-invocation: true`, então o Claude não a aciona sozinho e a descrição dela não ocupa contexto enquanto você não a chama. Se preferir seleção automática por frases como "retoma" ou "revise este app", remova essa linha do `SKILL.md` instalado; um `git pull` futuro pode pedir para você manter a remoção.
+Abra o Claude Code na raiz do aplicativo e invoque `/auxcode <pedido>`. A skill só carrega por comando: o `SKILL.md` traz `disable-model-invocation: true`, então o Claude não a aciona sozinho e a descrição dela não ocupa contexto enquanto você não a chama. Se preferir seleção automática pelos casos da descrição, remova essa linha do `SKILL.md` instalado; um `git pull` futuro pode pedir para você manter a remoção.
 
 ```text
 /auxcode Quero começar um aplicativo de agenda. Defina comigo propósito,
@@ -71,7 +71,7 @@ Como a skill não carrega sozinha, o gesto de início de sessão num aplicativo 
 
 A skill orienta decisões e registros. Não é um monitor automático, não mede tokens nem percentuais de contexto e não garante ausência de erro ou cumprimento de prazo. A economia vem de ler menos na retomada, não repetir tentativas descartadas e não escrever código fora do escopo.
 
-Versão 0.5.0, setembro de 2026. Estrutura validada. Duas sessões de uso real na 0.3.x, retomada e revisão diagnóstica, geraram os ajustes da 0.3.1; a 0.4.0 saiu sem uso real e a 0.4.1 veio de uma única observação de uso; as 29 entradas da 0.5.0 vieram da leitura do `github/spec-kit` com verificação adversarial, e **nenhuma foi exercitada em sessão real ainda**. Detalhes em [docs/VALIDACAO.md](docs/VALIDACAO.md) e no [histórico de versões](CHANGELOG.md).
+Versão 0.5.1, setembro de 2026. Estrutura validada. Duas sessões de uso real na 0.3.x, retomada e revisão diagnóstica, geraram os ajustes da 0.3.1; a 0.4.0 saiu sem uso real e a 0.4.1 veio de uma única observação de uso; as 29 entradas da 0.5.0 vieram da leitura do `github/spec-kit` com verificação adversarial, e **nenhuma foi exercitada em sessão real ainda**; a 0.5.1 só alinhou o gatilho e o briefing ao texto da 0.5.0. Detalhes em [docs/VALIDACAO.md](docs/VALIDACAO.md) e no [histórico de versões](CHANGELOG.md).
 
 ## Relatar o que observou
 

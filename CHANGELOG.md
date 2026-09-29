@@ -1,5 +1,12 @@
 # Histórico de versões
 
+## 0.5.1 — 29 de setembro de 2026
+
+Duas correções de texto, sem regra nova, vindas de uma auditoria de prompt dos arquivos de instrução (alvo: Claude Opus 5.5). **Sem uso real.**
+
+- O `when_to_use` descreve a intenção ("o trabalho num aplicativo deve seguir o roadmap, as regras e o checkpoint dele") em vez de enumerar frases-gatilho quase sinônimas. É o gatilho amplo que já fez a skill carregar sozinha em qualquer projeto; hoje o `disable-model-invocation` o neutraliza, mas o README oferecia tirar essa trava. O README acompanha.
+- O caminho "projeto em andamento" remete ao formato de `projeto.md` em vez de listar campos de uma versão anterior, que nomeava "propósito" e deixava de fora Jornadas, Fora do escopo e Restrições. Com isso, as regras da 0.5.0 sobre o briefing (fonte por campo, jornadas sem item no roadmap) valem também nesse caminho. O recorte de etapa (atual e seguinte) continua.
+
 ## 0.5.0 — 7 de setembro de 2026
 
 Vinte e nove entradas derivadas do `github/spec-kit` (commit `4a7341a`), cada uma verificada por três lentes adversariais: fidelidade à fonte, encaixe no auxcode e valor contra falhas já observadas. Nenhuma linha do código Python do spec-kit entrou; das 81 citações de origem, 80 são de prompts e documentos em Markdown e uma é de um script de shell. **Sem uso real ainda.**
