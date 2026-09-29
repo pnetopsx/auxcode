@@ -1,5 +1,25 @@
 # Validação — auxcode
 
+## 0.5.1 — 29 de setembro de 2026
+
+**Origem.** Auditoria de prompt (`/claude-api prompt-audit`) dos arquivos de instrução do usuário, com o Claude Opus 5.5 como modelo-alvo. Duas correções de texto, nenhuma regra nova:
+
+- `when_to_use` (`SKILL.md:5`): a lista de frases quase sinônimas ("retoma", "continua de onde parou", "revise este app"…) vira a categoria de intenção, com os casos em que a skill não se aplica. O registro da 0.4.x nesta página mostra o dano do gatilho amplo (a skill carregava sozinha ao abrir qualquer projeto). O `README.md:26` passa a apontar "os casos da descrição".
+- Caminho "projeto em andamento" (`SKILL.md:18`): a lista de campos do briefing vinha da 0.4.0 e divergia do `projeto.md` da 0.5.0. Passa a remeter ao formato de `projeto.md`, mantendo o roadmap só da etapa atual e da seguinte, mais o mapa de fontes.
+
+**Fora desta versão (decisão do usuário).** `SKILL.md:32` diz que a recuperação de uma gravação interrompida é resposta do usuário; `projeto.md:52` deixa a mesma classe virar suposição registrada. As duas linhas vieram do mesmo commit.
+
+**Conferência estrutural.** Frontmatter reanalisado com `YAML.safe_load` (Ruby/Psych): cinco chaves, `disable-model-invocation` lido como booleano verdadeiro, descrição com 439 caracteres e `when_to_use` com 200, combinado de 639 (teto de 1.536 do listing). Corpo com 1.871 palavras. Os links relativos de `SKILL.md`, `README.md` e `revisao.md` resolvem. Nenhum script ou dependência de execução foi acrescentado.
+
+```text
+c83ac3a570448ae0dce93404f3ec41079f07eb8d765f55c5c20bafd437deb5c5  SKILL.md
+55c291a6e04198e8a59e2708ec85c6fb51e79b768a7b0cc400dc1afcc208428d  checkpoint.md
+1f0a30935fd17e33068c81eaddea1563501df9baf8795936a9192212efe3397f  projeto.md
+34f17add8a7ccc836109c6d9a1f1a70baafdc6f5b0ddbf5131b68a523d38f1f0  revisao.md
+```
+
+**O que esta versão NÃO tem.** Uso real. As duas mudanças não alteram regra; só o texto de roteamento (que o `disable-model-invocation` mantém fora do contexto) e a remissão do briefing.
+
 ## 0.5.0 — 7 de setembro de 2026
 
 **Origem.** Uma cópia do `github/spec-kit` (commit `4a7341a`, main, 4 de setembro de 2026) foi clonada numa pasta temporária e lida. **Nada do repositório foi executado**: nem a CLI, nem os testes, nem os scripts. A mecânica de 18 unidades do spec-kit foi extraída em paralelo, comparada com os três arquivos da skill, fundida sem repetições e submetida a três verificadores independentes por candidata: fidelidade à fonte (o spec-kit realmente prescreve isto, no trecho citado?), encaixe (contradiz alguma regra do auxcode, é procedimento com saída conferível, cabe no orçamento de contexto?) e valor (muda o comportamento numa sessão real, contra uma lista de falhas já observadas?). Um crítico de completude apontou 16 mecanismos não cobertos e abriu uma rodada extra.
